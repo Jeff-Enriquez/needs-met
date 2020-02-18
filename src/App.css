@@ -2,12 +2,13 @@
   box-sizing: border-box;
 }
 
-body{
+main{
   margin: 10px;
 }
 
 /* ------------ HEADER -------------- */
 .header-nav {
+  margin: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -55,8 +56,25 @@ h2 {
 /* ---------- Footer ----------- */
 .footer-nav {
   background-color: black;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
 }
 
-.footer-nav img {
+.footer-nav div {
+  text-align: center;
+}
+
+.footer-nav div img {
   width: 40px;
+}
+
+.footer-p {
+  margin: 0 auto;
+  color: white;
+  bottom: 0;
+  font-size: 12px;
 }
