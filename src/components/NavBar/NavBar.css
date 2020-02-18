@@ -1,0 +1,28 @@
+* {
+ box-sizing: border-box;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav * {
+  margin: 0;
+}
+
+#c-container {
+  display: flex;
+  align-items: center;
+}
+
+#c-logo {
+  width: 40px;
+  padding-right: 10px;
+}
+
+#dots {
+  float: right;
+  width: 20px;
+}
