@@ -8,10 +8,11 @@ main{
 
 /* ------------ HEADER -------------- */
 .header-nav {
-  margin: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid gray;
 }
 
 .header-nav * {
@@ -24,7 +25,7 @@ main{
 }
 
 #h-logo {
-  width: 40px;
+  width: 60px;
   padding-right: 10px;
 }
 
@@ -77,4 +78,26 @@ h2 {
   color: white;
   bottom: 0;
   font-size: 12px;
+}
+
+/* --------------- Needs -------------- */
+.needs-a {
+  display: inline-block;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.needs-a:first-of-type {
+  float: left;
+}
+
+.needs-a:last-of-type {
+  float: right;
+}
+
+#needs-selected {
+  color: red;
 }

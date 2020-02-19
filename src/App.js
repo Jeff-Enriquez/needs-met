@@ -1,16 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-function App() {
-  return (
-    <>
-      <Header/>
-      <main>
-      </main>
-      <Footer/>
-    </>
-  );
+import Login from './components/Login';
+import Needs from './components/Needs';
+
+class App extends Component {
+  state = {
+    user: {
+      isLoggedIn: true,
+    },
+    isUnmet: false,
+  }
+
+  toggleIsUnmet = () => {
+    this.setState((state) => ({
+     isUnmet: !state.isUnmet,
+    }))
+  }
+
+  render() {
+    if(this.state.user.isLoggedIn) {
+      return (
+        <>
+          <Header/>
+          <main>
+            <Needs isUnmet={this.state.isUnmet} toggleIsUnmet={() => this.toggleIsUnmet()}/>
+          </main>
+          <Footer/>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Login/>
+        </>
+      )
+    }
+  }
 }
 
 export default App;
