@@ -18,15 +18,21 @@ function Footer({ currentPage }) {
         <p className={styles.p}>Messages</p>
       </div>
       <div>
-        <img src={process.env.PUBLIC_URL + '/images/plus.png'} alt='plus'/>
+        <img src={process.env.PUBLIC_URL + '/images/plus.png'} alt='plus'
+          onClick={() => currentPage('add a need')}
+        />
         <p className={styles.p}>Add Need</p>
       </div>
       <div>
-        <img src={process.env.PUBLIC_URL + '/images/bag.png'} alt='bag'/>
+        <img src={process.env.PUBLIC_URL + '/images/bag.png'} alt='bag'
+          onClick={() => currentPage('my needs')}
+        />
         <p className={styles.p}>My Needs</p>
       </div>
       <div>
-        <img src={process.env.PUBLIC_URL + '/images/hamburger.png'} alt='hamburger-icon'/>
+        <img src={process.env.PUBLIC_URL + '/images/hamburger.png'} alt='hamburger-icon'
+          onClick={() => currentPage('more')}
+        />
         <p className={styles.p}>More</p>
       </div>
     </nav>
