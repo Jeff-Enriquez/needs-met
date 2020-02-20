@@ -24,9 +24,7 @@ class App extends Component {
       return (
         <>
           <Header/>
-          <main>
-            <Needs isUnmet={this.state.isUnmet} toggleIsUnmet={() => this.toggleIsUnmet()}/>
-          </main>
+          <Needs isUnmet={this.state.isUnmet} toggleIsUnmet={() => this.toggleIsUnmet()}/>
           <Footer/>
         </>
       );

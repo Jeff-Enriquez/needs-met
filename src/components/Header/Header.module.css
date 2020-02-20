@@ -1,0 +1,29 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: var(--app-color);
+  border-bottom: 1px solid gray;
+  color: white;
+}
+
+.nav * {
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 60px;
+  padding-right: 10px;
+}
+
+.dots {
+  float: right;
+  width: 20px;
+  visibility: hidden;
+}

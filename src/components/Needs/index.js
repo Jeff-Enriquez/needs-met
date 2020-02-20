@@ -1,24 +1,24 @@
 import React from 'react';
-
+import styles from './Needs.module.css'
 
 function Needs({ isUnmet, toggleIsUnmet }) {
   return (
     <>
       {isUnmet ? (
-        <>
-          <button className='needs-a' id='needs-selected'>Unmet Needs</button>
-          <button className='needs-a' onClick={toggleIsUnmet}>Met Needs</button>
-        </>
+        <div className={styles.btnContainer}>
+          <button className={[styles.button, styles.darkblue].join(' ')} >Unmet Needs</button>
+          <button className={styles.button} onClick={toggleIsUnmet}>Met Needs</button>
+        </div>
       ) : (
-        <>
-          <button className='needs-a' onClick={toggleIsUnmet}>Unmet Needs</button>
-          <button className='needs-a' id='needs-selected'>Met Needs</button>
-        </>
+        <div className={styles.btnContainer}>
+          <button className={styles.button} onClick={toggleIsUnmet}>Unmet Needs</button>
+          <button className={[styles.button, styles.darkblue].join(" ")} id='needs-selected'>Met Needs</button>
+        </div>
       )}
-      <div>
+      <main>
         <img src={process.env.PUBLIC_URL + '/images/sandals.png'} alt='profile'/>
         <p>This is a comment of what my posted need is.</p>
-      </div>
+      </main>
     </> 
   );
 }
