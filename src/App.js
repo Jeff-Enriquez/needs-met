@@ -4,13 +4,15 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Login from './components/Login';
 import Needs from './components/Needs';
+import Messages from './components/Messages';
 
 class App extends Component {
   state = {
     user: {
       isLoggedIn: true,
     },
-    isUnmet: false,
+    isUnmet: true,
+    currentPage: 'help',
   }
 
   toggleIsUnmet = () => {
@@ -19,15 +21,34 @@ class App extends Component {
     }))
   }
 
+  currentPage = () => {
+    console.log('hit')
+  }
+
   render() {
-    if(this.state.user.isLoggedIn) {
-      return (
-        <>
-          <Header/>
-          <Needs isUnmet={this.state.isUnmet} toggleIsUnmet={() => this.toggleIsUnmet()}/>
-          <Footer/>
-        </>
-      );
+    let state = this.state;
+    if(state.user.isLoggedIn) {
+      if(state.currentPage === 'help') {
+        return (
+          <>
+            <Header/>
+            <Needs 
+              isUnmet={state.isUnmet} 
+              toggleIsUnmet={this.toggleIsUnmet}
+            />
+            <Footer currentPage={this.currentPage} />
+          </>
+        );
+      } else if(state.currentPage === 'messages') {
+        return (
+          <>
+            <Header/>
+            <Messages/>
+            <Footer/>
+          </>
+        );
+      }
+      
     } else {
       return (
         <>

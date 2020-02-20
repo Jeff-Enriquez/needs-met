@@ -1,12 +1,14 @@
 import React from 'react';
 import styles from './Footer.module.css'
 
-function Footer() {
+function Footer({ currentPage }) {
   return (
     <>
     <nav className={styles.nav}>
       <div>
-        <img src={process.env.PUBLIC_URL + '/images/home.jpeg'} alt='home' />
+        <img src={process.env.PUBLIC_URL + '/images/home.jpeg'} alt='home'
+          onClick={() => currentPage()}
+        />
         <p className={styles.p}>Help Others</p>
       </div>
       <div>
