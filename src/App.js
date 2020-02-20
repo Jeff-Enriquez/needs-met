@@ -21,8 +21,10 @@ class App extends Component {
     }))
   }
 
-  currentPage = () => {
-    console.log('hit')
+  currentPage = (page) => {
+    this.setState({
+      currentPage: page,
+     })
   }
 
   render() {
@@ -44,7 +46,7 @@ class App extends Component {
           <>
             <Header/>
             <Messages/>
-            <Footer/>
+            <Footer currentPage={this.currentPage} />
           </>
         );
       }

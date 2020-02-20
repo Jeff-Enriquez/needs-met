@@ -6,13 +6,15 @@ function Footer({ currentPage }) {
     <>
     <nav className={styles.nav}>
       <div>
-        <img src={process.env.PUBLIC_URL + '/images/home.jpeg'} alt='home'
-          onClick={() => currentPage()}
+        <img src={process.env.PUBLIC_URL + '/images/home.jpeg'} alt='help'
+          onClick={() => currentPage('help')}
         />
         <p className={styles.p}>Help Others</p>
       </div>
       <div>
-        <img src={process.env.PUBLIC_URL + '/images/message.png'} alt='message'/>
+        <img src={process.env.PUBLIC_URL + '/images/message.png'} alt='message'
+          onClick={() => currentPage('messages')}
+        />
         <p className={styles.p}>Messages</p>
       </div>
       <div>
