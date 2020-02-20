@@ -1,3 +1,7 @@
+.main {
+  margin: 0 10px 0 10px;
+}
+
 .btnContainer {
   position: relative;
   padding: 12px;
@@ -25,6 +29,28 @@
   right: 10px;
 }
 
-.darkblue {
-  color: red;
+.needsContainer {
+  display: grid;
+  grid-template-columns: 40px auto;
+  grid-template-rows: 100%;
+  margin-top: 25px;
+}
+
+.needsContainer * {
+  margin: 0;
+}
+
+.needsContainer img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.needsContainer p {
+  margin-left: 10px;
+}
+
+.lightblue {
+  color: lightskyblue;
 }

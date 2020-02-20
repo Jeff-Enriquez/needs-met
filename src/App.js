@@ -30,6 +30,16 @@ class App extends Component {
      })
   }
 
+  addNavBars = (Component) => {
+    return (
+      <>
+        <Header/>
+        <Component/>
+        <Footer currentPage={this.currentPage} />
+      </>
+    )
+  }
+
   render() {
     let state = this.state;
     if(state.user.isLoggedIn) {
@@ -45,37 +55,13 @@ class App extends Component {
           </>
         );
       } else if(state.currentPage === 'messages') {
-        return (
-          <>
-            <Header/>
-            <Messages/>
-            <Footer currentPage={this.currentPage} />
-          </>
-        );
+          return this.addNavBars(Messages)
       } else if(state.currentPage === 'add a need') {
-        return (
-          <>
-            <Header/>
-            <AddANeed/>
-            <Footer currentPage={this.currentPage} />
-          </>
-        )
+          return this.addNavBars(AddANeed)
       } else if(state.currentPage === 'my needs') {
-        return (
-          <>
-            <Header/>
-            <MyNeeds/>
-            <Footer currentPage={this.currentPage} />
-          </>
-        )
+          return this.addNavBars(MyNeeds)
       } else if(state.currentPage === 'more') {
-        return (
-          <>
-            <Header/>
-            <More/>
-            <Footer currentPage={this.currentPage} />
-          </>
-        )
+          return this.addNavBars(More)
       }
     } else {
       return (
