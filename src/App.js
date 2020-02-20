@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import Login from './components/Login';
 import Needs from './components/Needs';
 import Messages from './components/Messages';
@@ -77,7 +77,6 @@ class App extends Component {
           </>
         )
       }
-      
     } else {
       return (
         <>

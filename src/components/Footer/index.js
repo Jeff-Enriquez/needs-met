@@ -6,7 +6,7 @@ function Footer({ currentPage }) {
     <>
     <nav className={styles.nav}>
       <div>
-        <img src={process.env.PUBLIC_URL + '/images/home.jpeg'} alt='help'
+        <img src={process.env.PUBLIC_URL + '/images/help.png'} alt='help'
           onClick={() => currentPage('help')}
         />
         <p className={styles.p}>Help Others</p>
