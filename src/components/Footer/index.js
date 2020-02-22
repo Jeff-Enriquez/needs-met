@@ -1,40 +1,41 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import styles from './Footer.module.css'
 
-function Footer({ currentPage }) {
+function Footer() {
   return (
     <>
     <nav className={styles.nav}>
-      <div>
-        <img src={process.env.PUBLIC_URL + '/images/help.png'} alt='help'
-          onClick={() => currentPage('help')}
-        />
-        <p className={styles.p}>Help Others</p>
-      </div>
-      <div>
-        <img src={process.env.PUBLIC_URL + '/images/message.png'} alt='message'
-          onClick={() => currentPage('messages')}
-        />
-        <p className={styles.p}>Messages</p>
-      </div>
-      <div>
-        <img src={process.env.PUBLIC_URL + '/images/plus.png'} alt='plus'
-          onClick={() => currentPage('add a need')}
-        />
-        <p className={styles.p}>Add Need</p>
-      </div>
-      <div>
-        <img src={process.env.PUBLIC_URL + '/images/bag.png'} alt='bag'
-          onClick={() => currentPage('my needs')}
-        />
-        <p className={styles.p}>My Needs</p>
-      </div>
-      <div>
-        <img src={process.env.PUBLIC_URL + '/images/hamburger.png'} alt='hamburger-icon'
-          onClick={() => currentPage('more')}
-        />
-        <p className={styles.p}>More</p>
-      </div>
+      <NavLink exact to='/'>
+        <div>
+          <img src={process.env.PUBLIC_URL + '/images/help.png'} alt='help'/>
+          <p className={styles.p}>Help Others</p>
+        </div>
+      </NavLink>
+      <NavLink exact to='/messages'>
+        <div>
+          <img src={process.env.PUBLIC_URL + '/images/message.png'} alt='message'/>
+          <p className={styles.p}>Messages</p>
+        </div>
+      </NavLink>
+      <NavLink exact to='/add-a-need'>
+        <div>
+          <img src={process.env.PUBLIC_URL + '/images/plus.png'} alt='plus'/>
+          <p className={styles.p}>Add Need</p>
+        </div>
+      </NavLink>
+      <NavLink exact to='/my-needs'>
+        <div>
+          <img src={process.env.PUBLIC_URL + '/images/bag.png'} alt='bag'/>
+          <p className={styles.p}>My Needs</p>
+        </div>
+      </NavLink>
+      <NavLink exact to='/more'>
+        <div>
+          <img src={process.env.PUBLIC_URL + '/images/hamburger.png'} alt='hamburger-icon'/>
+          <p className={styles.p}>More</p>
+        </div>
+      </NavLink>
     </nav>
     </> 
   );

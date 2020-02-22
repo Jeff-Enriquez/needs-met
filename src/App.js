@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom'
+import { Route, Switch, useHistory } from 'react-router-dom'
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -10,13 +10,13 @@ import AddANeed from './components/AddANeed';
 import MyNeeds from './components/MyNeeds';
 import More from './components/More';
 
+
 class App extends Component {
   state = {
     user: {
-      isLoggedIn: true,
+      isLoggedIn: false,
     },
-    isUnmet: true,
-    currentPage: 'help',
+    isUnmet: false,
   }
 
   toggleIsUnmet = () => {
@@ -31,45 +31,27 @@ class App extends Component {
      })
   }
 
-  addNavBars = (Component) => {
-    return (
-      <>
-        <Header/>
-        <Component/>
-        <Footer currentPage={this.currentPage} />
-      </>
-    )
-  }
-
   render() {
-    let state = this.state;
-    if(state.user.isLoggedIn) {
-      if(state.currentPage === 'help') {
-        return (
-          <>
-            <Header/>
-            <Needs 
-              isUnmet={state.isUnmet} 
-              toggleIsUnmet={this.toggleIsUnmet}
-            />
-            <Footer currentPage={this.currentPage} />
-          </>
-        );
-      } else if(state.currentPage === 'messages') {
-          return this.addNavBars(Messages)
-      } else if(state.currentPage === 'add a need') {
-          return this.addNavBars(AddANeed)
-      } else if(state.currentPage === 'my needs') {
-          return this.addNavBars(MyNeeds)
-      } else if(state.currentPage === 'more') {
-          return this.addNavBars(More)
-      }
+    if(!this.state.user.isLoggedIn){
+      return <Login />
     } else {
       return (
         <>
-          <Login/>
+          <Header />
+          <Switch>
+            <Route exact path='/' render={() => <Needs
+              isUnmet={this.state.isUnmet} 
+              toggleIsUnmet={this.toggleIsUnmet}
+            />} />
+            <Route exact path='/messages' component={Messages} />
+            <Route exact path='/add-a-need' component={AddANeed} />
+            <Route exact path='/my-needs' component={MyNeeds} />
+            <Route exact path='/more' component={More} />
+            <Route exact path='/login' component={Login} />
+          </Switch>
+          <Footer currentPage={this.currentPage} />
         </>
-      )
+      );
     }
   }
 }
