@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import'./Login.css';
+import styles from './Login.module.css';
 
 class Login extends Component {
   state = {
@@ -16,31 +16,33 @@ class Login extends Component {
     const { isLogin } = this.state
 
     return (
-    <div className="form-structor">
-      <div className={isLogin ? 'login' : 'login slide-up'}>
-        <h2 className="form-title" id="login" onClick={isLogin ? () => {} : this.switchIsLogin }> 
-          <span>or</span>Log in
-        </h2>
-        <div className="form-holder">
-          <input type="email" className="input" placeholder="Email" />
-          <input type="password" className="input" placeholder="Password" />
-        </div>
-        <button className="submit-btn">Log in</button>
-      </div>
-      <div className={isLogin ? 'signup slide-up' : 'signup'}>
-        <div className="center">
-          <h2 className="form-title" id="signup" onClick={isLogin ? this.switchIsLogin : () => {}}>
-            <span>or</span>Sign up
-          </h2>
-          <div className="form-holder">
-            <input type="text" className="input" placeholder="Name" />
-            <input type="email" className="input" placeholder="Email" />
-            <input type="password" className="input" placeholder="Password" />
+      <main className={styles.main}>
+        <div className={styles.formStructor}>
+          <div className={isLogin ? styles.login : `${styles.login} ${styles.slideUp}`}>
+            <h2 className={styles.formTitle} onClick={isLogin ? () => {} : this.switchIsLogin }> 
+              <span className={styles.span} >or</span>Log in
+            </h2>
+            <div className={styles.formHolder}>
+              <input type="email" className={styles.input} placeholder="Email" />
+              <input type="password" className={styles.input} placeholder="Password" />
+            </div>
+            <button className={styles.submitBtn}>Log in</button>
           </div>
-          <button className="submit-btn">Sign up</button>
+          <div className={isLogin ? `${styles.signup} ${styles.slideUp}` : styles.signup}>
+            <div className={styles.center}>
+              <h2 className={styles.formTitle} onClick={isLogin ? this.switchIsLogin : () => {}}>
+                <span className={styles.span} >or</span>Sign up
+              </h2>
+              <div className={styles.formHolder}>
+                <input type="text" className={styles.input} placeholder="Name" />
+                <input type="email" className={styles.input} placeholder="Email" />
+                <input type="password" className={styles.input} placeholder="Password" />
+              </div>
+              <button className={styles.submitBtn}>Sign up</button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </main>
     );
   }
 }
