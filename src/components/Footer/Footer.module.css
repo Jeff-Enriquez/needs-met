@@ -6,6 +6,7 @@
   padding: 10px;
   display: flex;
   justify-content: space-around;
+  box-sizing: border-box;
 }
 
 .nav div {

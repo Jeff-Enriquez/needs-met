@@ -14,7 +14,7 @@ import More from './components/More';
 class App extends Component {
   state = {
     user: {
-      isLoggedIn: false,
+      isLoggedIn: true,
     },
     isUnmet: false,
   }
