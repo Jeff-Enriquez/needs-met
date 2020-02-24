@@ -3,6 +3,11 @@ import styles from './Login.module.css';
 
 class Login extends Component {
   state = {
+    loginEmail: '',
+    loginPassword: '',
+    signupName: '',
+    signupEmail: '',
+    signupPassword: '',
     isLogin: true,
   }
 
@@ -12,8 +17,15 @@ class Login extends Component {
     }))
   }
 
+  handleChange = e => {
+    console.log(e.target)
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
+  }
+
   render(){
-    const { isLogin } = this.state
+    const { isLogin, loginEmail, loginPassword, signupName, signupEmail, signupPassword } = this.state
 
     return (
       <main className={styles.main}>
@@ -23,8 +35,8 @@ class Login extends Component {
               <span className={styles.span} >or</span>Log in
             </h2>
             <div className={styles.formHolder}>
-              <input type="email" className={styles.input} placeholder="Email" />
-              <input type="password" className={styles.input} placeholder="Password" />
+              <input type="email" className={styles.input} placeholder="Email" name='loginEmail' value={loginEmail} onChange={this.handleChange} />
+              <input type="password" className={styles.input} placeholder="Password" name='loginPassword' value={loginPassword} onChange={this.handleChange} />
             </div>
             <button className={styles.submitBtn}>Log in</button>
           </div>
@@ -34,9 +46,9 @@ class Login extends Component {
                 <span className={styles.span} >or</span>Sign up
               </h2>
               <div className={styles.formHolder}>
-                <input type="text" className={styles.input} placeholder="Name" />
-                <input type="email" className={styles.input} placeholder="Email" />
-                <input type="password" className={styles.input} placeholder="Password" />
+                <input type="text" className={styles.input} placeholder="Name" name='signupName' value={signupName} onChange={this.handleChange} />
+                <input type="email" className={styles.input} placeholder="Email" name='signupEmail' value={signupEmail} onChange={this.handleChange} />
+                <input type="password" className={styles.input} placeholder="Password" name='signupPassword' value={signupPassword} onChange={this.handleChange} />
               </div>
               <button className={styles.submitBtn}>Sign up</button>
             </div>
