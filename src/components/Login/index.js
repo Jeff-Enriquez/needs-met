@@ -38,6 +38,8 @@ class Login extends Component {
         isAuth: true,
       });
     } catch (error) {
+      console.log(error)
+      console.log('hit')
     }
   };
 
@@ -71,23 +73,27 @@ class Login extends Component {
             <h2 className={styles.formTitle} onClick={isLogin ? () => {} : this.switchIsLogin }> 
               <span className={styles.span} >or</span>Log in
             </h2>
-            <div className={styles.formHolder}>
-              <input type="email" className={styles.input} placeholder="Email" name='loginEmail' value={loginEmail} onChange={this.handleChange} />
-              <input type="password" className={styles.input} placeholder="Password" name='loginPassword' value={loginPassword} onChange={this.handleChange} />
-            </div>
-            <button className={styles.submitBtn}>Log in</button>
+            <form onClick={() => this.handleLoginForm}>
+              <div className={styles.formHolder}>
+                <input type="email" className={styles.input} placeholder="Email" name='loginEmail' value={loginEmail} onChange={this.handleChange} required />
+                <input type="password" className={styles.input} placeholder="Password" name='loginPassword' value={loginPassword} onChange={this.handleChange} required />
+              </div>
+              <button type='submit' className={styles.submitBtn}>Log in</button>
+            </form>
           </div>
           <div className={isLogin ? `${styles.signup} ${styles.slideUp}` : styles.signup}>
             <div className={styles.center}>
               <h2 className={styles.formTitle} onClick={isLogin ? this.switchIsLogin : () => {}}>
                 <span className={styles.span} >or</span>Sign up
               </h2>
-              <div className={styles.formHolder}>
-                <input type="text" className={styles.input} placeholder="Name" name='signupName' value={signupName} onChange={this.handleChange} />
-                <input type="email" className={styles.input} placeholder="Email" name='signupEmail' value={signupEmail} onChange={this.handleChange} />
-                <input type="password" className={styles.input} placeholder="Password" name='signupPassword' value={signupPassword} onChange={this.handleChange} />
-              </div>
-              <button className={styles.submitBtn}>Sign up</button>
+              <form onClick={this.handleSignupForm}>
+                <div className={styles.formHolder}>
+                  <input type="text" className={styles.input} placeholder="Name" name='signupName' value={signupName} onChange={this.handleChange} />
+                  <input type="email" className={styles.input} placeholder="Email" name='signupEmail' value={signupEmail} onChange={this.handleChange} />
+                  <input type="password" className={styles.input} placeholder="Password" name='signupPassword' value={signupPassword} onChange={this.handleChange} />
+                </div>  
+              <button type='submit' className={styles.submitBtn}>Sign up</button>
+              </form>
             </div>
           </div>
         </div>
