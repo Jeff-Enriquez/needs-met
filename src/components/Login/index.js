@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './Login.module.css';
+import Firebase from '../Firebase/firebase';
 
 class Login extends Component {
   state = {
@@ -9,6 +10,8 @@ class Login extends Component {
     signupEmail: '',
     signupPassword: '',
     isLogin: true,
+    isAuth: false,
+    error: null,
   }
 
   switchIsLogin = () => {
@@ -18,11 +21,45 @@ class Login extends Component {
   }
 
   handleChange = e => {
-    console.log(e.target)
     this.setState({
       [e.target.name]: e.target.value,
     })
   }
+
+  handleLoginForm = async e => {
+    const { loginEmail, loginPassword } = this.state;
+    e.preventDefault();
+    try {
+      await Firebase.doSignInWithEmailAndPassword(loginEmail, loginPassword);
+      // this.props.doSetCurrentUser({
+      //   email: loginEmail,
+      // });
+      this.setState({
+        isAuth: true,
+      });
+    } catch (error) {
+    }
+  };
+
+  handleSignupForm = async e => {
+    const { signupName, signupEmail, signupPassword } = this.state;
+    e.preventDefault();
+    try {
+      await Firebase.doCreateUserWithEmailAndPassword(
+        signupEmail,
+        signupPassword,
+      );
+      // this.props.doSetCurrentUser({
+      //   name: signupName,
+      //   email: signupEmail,
+      // });
+      this.setState({ isAuth: true });
+    } catch (error) {
+      this.setState({
+        error,
+      });
+    }
+  };
 
   render(){
     const { isLogin, loginEmail, loginPassword, signupName, signupEmail, signupPassword } = this.state
