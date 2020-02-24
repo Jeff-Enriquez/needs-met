@@ -34,9 +34,9 @@ class Login extends Component {
     e.preventDefault();
     try {
       await Firebase.doSignInWithEmailAndPassword(loginEmail, loginPassword);
-      // this.props.doSetCurrentUser({
-      //   email: loginEmail,
-      // });
+      this.props.doSetCurrentUser({
+        email: loginEmail,
+      });
       this.setState({
         isAuth: true,
       });
@@ -55,11 +55,11 @@ class Login extends Component {
         signupEmail,
         signupPassword1,
       );
-      // this.props.doSetCurrentUser({
-      //   name: signupName,
-      //   email: signupEmail,
-      // });
-      // this.setState({ isAuth: true });
+      this.props.doSetCurrentUser({
+        name: signupName,
+        email: signupEmail,
+      });
+      this.setState({ isAuth: true });
     } catch (signupError) {
       this.setState({
         signupError,

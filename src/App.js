@@ -13,10 +13,16 @@ import More from './components/More';
 
 class App extends Component {
   state = {
-    user: {
-      isLoggedIn: false,
-    },
+    currentUser: {},
+    isLoggedIn: false,
     isUnmet: false,
+  }
+
+  doSetCurrentUser = currentUser => {
+    this.setState({
+      currentUser,
+      isLoggedIn: currentUser ? true : false,
+    })
   }
 
   toggleIsUnmet = () => {
@@ -38,7 +44,9 @@ class App extends Component {
           <Route exact path='/add-a-need' component={AddANeed} />
           <Route exact path='/my-needs' component={MyNeeds} />
           <Route exact path='/more' component={More} />
-          <Route exact path='/login' component={Login} />
+          <Route exact path='/login' render={() => <Login
+            doSetCurrentUser={this.doSetCurrentUser}
+          />} />
         </Switch>
         {/* <Footer currentPage={this.currentPage} /> */}
       </>
