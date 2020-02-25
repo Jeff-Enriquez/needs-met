@@ -1,0 +1,50 @@
+.main {
+  border: 1px solid red;
+}
+
+.main * {
+  border: 1px solid gray;
+}
+
+.h1 {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.form * {
+  display: block;
+  margin: 0 auto;
+  margin-top: 5px;
+}
+
+.textarea {
+  width: 80vw;
+  height: 40vh;
+  resize: none;
+}
+
+.textarea:first-of-type {
+  height: 10vh;
+}
+
+.submitBtn{
+  padding: 6px 20px;
+  cursor: pointer;
+  overflow: visible;
+  font: bold 13px arial, helvetica, sans-serif;
+  text-decoration: none;
+  color: #fff;
+  background-color: #269CE9;
+  border-color: #269CE9;
+  text-shadow: 0 1px 0 rgba(0,0,0,.2); background-image: linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
+  transition: background-color .2s ease-out;
+  border-radius: 3px;
+}
+
+.submitBtn:active{
+  background-color: #70B9E8;
+}
+
+.submitBtn.blue:hover{
+  background-color: #70B9E8;
+}

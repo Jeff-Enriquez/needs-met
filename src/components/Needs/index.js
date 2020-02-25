@@ -7,11 +7,11 @@ const Needs = ({ isUnmet, toggleIsUnmet }) => {
       <div className={styles.fixBtns}>
         <div className={styles.btnContainer}>
           {isUnmet ? (
-              <><button className={`${styles.button} ${styles.lightblue}`} >Unmet Needs</button>
+              <><button className={`${styles.button} ${styles.blue}`} >Unmet Needs</button>
               <button className={styles.button} onClick={toggleIsUnmet}>Met Needs</button></>
           ) : (
               <><button className={styles.button} onClick={toggleIsUnmet}>Unmet Needs</button>
-              <button className={`${styles.button} ${styles.lightblue}`} id='needs-selected'>Met Needs</button></>
+              <button className={`${styles.button} ${styles.blue}`} id='needs-selected'>Met Needs</button></>
           )}
         </div>
       </div>
