@@ -9,11 +9,14 @@ import Messages from './components/Messages';
 import AddANeed from './components/AddANeed';
 import MyNeeds from './components/MyNeeds';
 import More from './components/More';
+import My404 from './components/My404';
+import PrivateRoute from './components/PrivateRoute'
 
 
 class App extends Component {
   state = {
     currentUser: {},
+    currentPage: '/',
     isLoggedIn: true,
     isUnmet: false,
   }
@@ -34,29 +37,29 @@ class App extends Component {
   render() {
     return (
       <>
-        {
-          this.state.isLoggedIn 
-          ?  
-          <>
-          <Header />
-          <Switch>
-            <Route exact path='/' render={() => <Needs
-              isUnmet={this.state.isUnmet} 
-              toggleIsUnmet={this.toggleIsUnmet}
-            />} />
-            <Route exact path='/messages' component={Messages} />
-            <Route exact path='/add-a-need' component={AddANeed} />
-            <Route exact path='/my-needs' component={MyNeeds} />
-            <Route exact path='/more' component={More} />
-          </Switch>
-          <Footer currentPage={this.currentPage} />
-          </>
-          :
-          <Route exact path='/login' render={() => <Login
-            doSetCurrentUser={this.doSetCurrentUser}
+        <Switch>
+          <Route exact path='/' render={() => <PrivateRoute
+            component={Needs}isUnmet={this.state.isUnmet} 
+            toggleIsUnmet={this.toggleIsUnmet}
+            isLoggedIn={this.state.isLoggedIn}
           />} />
-        }
+          <Route exact path='/messages' render={() => <PrivateRoute
+            component={Messages}
+          />} />
+          <Route exact path='/add-a-need' render={() => <PrivateRoute
+            component={AddANeed}
+          />} />
+          <Route exact path='/my-needs' render={() => <PrivateRoute
+            component={MyNeeds}
+          />} />
+          <Route exact path='/more' render={() => <PrivateRoute
+            component={More}
+          />} />
+          <Route exact path='/login' component={Login} />
+          <Route component={My404} />
+        </Switch>
       </>
+      
     );
   }
 }
