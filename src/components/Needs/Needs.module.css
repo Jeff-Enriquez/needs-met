@@ -1,5 +1,12 @@
 .main {
-  margin: 0 10px 0 10px;
+  margin: 107px 10px 98px 10px;
+}
+
+.fixBtns {
+  position: fixed;
+  top: 80px;
+  width: 100%;
+  background-color: white;
 }
 
 .btnContainer {
@@ -33,7 +40,7 @@
   display: grid;
   grid-template-columns: 40px auto;
   grid-template-rows: 100%;
-  margin-top: 25px;
+  margin-top: 20px;
 }
 
 .needsContainer * {
