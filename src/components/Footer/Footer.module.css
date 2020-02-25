@@ -2,6 +2,10 @@
   margin-top: 82px;
 }
 
+.a {
+  text-decoration: none;
+}
+
 .nav {
   background-color: var(--app-color);
   position: fixed;
@@ -23,7 +27,8 @@
 
 .p {
   margin: 0 auto;
-  color: white;
+  color: #B3B3B3;
   bottom: 0;
   font-size: 12px;
+  font-weight: bold;
 }

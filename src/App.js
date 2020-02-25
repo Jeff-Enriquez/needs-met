@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import './App.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
 import Login from './components/Login';
 import Needs from './components/Needs';
 import Messages from './components/Messages';
@@ -12,62 +10,55 @@ import More from './components/More';
 import My404 from './components/My404';
 import PrivateRoute from './components/PrivateRoute'
 
+const App = () => {
+  const [currentUser, setCurrentUser] = useState({})
+  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [isUnmet, setIsUnmet] = useState(true)
 
-
-class App extends Component {
-  state = {
-    currentUser: {},
-    currentPage: '/',
-    isLoggedIn: true,
-    isUnmet: false,
+  const doSetCurrentUser = user => {
+    setCurrentUser(user)
+    setIsLoggedIn(user ? true : false)
   }
 
-  doSetCurrentUser = currentUser => {
-    this.setState({
-      currentUser,
-      isLoggedIn: currentUser ? true : false,
-    })
+  const toggleIsUnmet = () => {
+    setIsUnmet(!isUnmet)
   }
-
-  toggleIsUnmet = () => {
-    this.setState((state) => ({
-     isUnmet: !state.isUnmet,
-    }))
-  }
-
-  render() {
-    return (
-      <>
-        <Switch>
-          <Route exact path='/' render={() => <PrivateRoute
-            component={Needs} 
-            isUnmet={this.state.isUnmet} 
-            toggleIsUnmet={this.toggleIsUnmet}
-            isLoggedIn={this.state.isLoggedIn}
-          />} />
-          <Route exact path='/messages' render={() => <PrivateRoute
-            component={Messages}
-            isLoggedIn={this.state.isLoggedIn}
-          />} />
-          <Route exact path='/add-a-need' render={() => <PrivateRoute
-            component={AddANeed}
-            isLoggedIn={this.state.isLoggedIn}
-          />} />
-          <Route exact path='/my-needs' render={() => <PrivateRoute
-            component={MyNeeds}
-            isLoggedIn={this.state.isLoggedIn}
-          />} />
-          <Route exact path='/more' render={() => <PrivateRoute
-            component={More}
-            isLoggedIn={this.state.isLoggedIn}
-          />} />
-          <Route exact path='/login' component={Login} />
-          <Route component={My404} />
-        </Switch>
-      </>
-      
-    );
-  }
+ 
+  return (
+    <>
+      <Switch>
+        <PrivateRoute
+          exact path='/'
+          component={Needs} 
+          isUnmet={isUnmet} 
+          toggleIsUnmet={toggleIsUnmet}
+          isLoggedIn={isLoggedIn}
+        />
+        <PrivateRoute
+          exact path='/messages'
+          component={Messages}
+          isLoggedIn={isLoggedIn}
+        />
+        <PrivateRoute
+          exact path='/add-a-need'
+          component={AddANeed}
+          isLoggedIn={isLoggedIn}
+        />
+        <PrivateRoute
+          exact path='/my-needs'
+          component={MyNeeds}
+          isLoggedIn={isLoggedIn}
+        />
+        <PrivateRoute
+          exact path='/more'
+          component={More}
+          isLoggedIn={isLoggedIn}
+        />
+        <Route exact path='/login' component={Login} />
+        <Route component={My404} />
+      </Switch>
+    </>
+  )
 }
 
 export default App;

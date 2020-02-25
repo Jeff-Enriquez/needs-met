@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Needs.module.css'
 
-function Needs({ isUnmet, toggleIsUnmet }) {
+const Needs = ({ isUnmet, toggleIsUnmet }) => {
   return (
     <>
       <div className={styles.fixBtns}>
