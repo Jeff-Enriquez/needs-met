@@ -10,6 +10,10 @@
   color: white;
 }
 
+.margin {
+  margin-bottom: 80px;
+}
+
 .nav * {
   margin: 0;
 }

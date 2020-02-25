@@ -13,6 +13,7 @@ function Header() {
       </div>
       <img className={styles.dots} src={process.env.PUBLIC_URL + '/images/dots.png'} alt='hamburger icon' />
     </nav>
+    <div className={styles.margin}></div>
     </> 
   );
 }
