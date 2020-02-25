@@ -34,21 +34,28 @@ class App extends Component {
   render() {
     return (
       <>
-        {/* <Header /> */}
-        <Switch>
-          <Route exact path='/' render={() => <Needs
-            isUnmet={this.state.isUnmet} 
-            toggleIsUnmet={this.toggleIsUnmet}
-          />} />
-          <Route exact path='/messages' component={Messages} />
-          <Route exact path='/add-a-need' component={AddANeed} />
-          <Route exact path='/my-needs' component={MyNeeds} />
-          <Route exact path='/more' component={More} />
+        {
+          this.state.isLoggedIn 
+          ?  
+          <>
+          <Header />
+          <Switch>
+            <Route exact path='/' render={() => <Needs
+              isUnmet={this.state.isUnmet} 
+              toggleIsUnmet={this.toggleIsUnmet}
+            />} />
+            <Route exact path='/messages' component={Messages} />
+            <Route exact path='/add-a-need' component={AddANeed} />
+            <Route exact path='/my-needs' component={MyNeeds} />
+            <Route exact path='/more' component={More} />
+          </Switch>
+          <Footer currentPage={this.currentPage} />
+          </>
+          :
           <Route exact path='/login' render={() => <Login
             doSetCurrentUser={this.doSetCurrentUser}
           />} />
-        </Switch>
-        {/* <Footer currentPage={this.currentPage} /> */}
+        }
       </>
     );
   }
