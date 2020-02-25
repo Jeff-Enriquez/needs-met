@@ -1,14 +1,7 @@
-.main {
-  border: 1px solid red;
-}
-
-.main * {
-  border: 1px solid gray;
-}
-
 .h1 {
   width: fit-content;
   margin: 0 auto;
+  color: #269CE9;
 }
 
 .form * {
@@ -21,10 +14,17 @@
   width: 80vw;
   height: 40vh;
   resize: none;
+  outline: none;
+  border-color: #269CE9;
+  font-size: 14px;
 }
 
 .textarea:first-of-type {
   height: 10vh;
+}
+
+.textarea::placeholder {
+  color: #269CE9;
 }
 
 .submitBtn{
