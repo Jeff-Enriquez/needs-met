@@ -13,6 +13,7 @@ import My404 from './components/My404';
 import PrivateRoute from './components/PrivateRoute'
 
 
+
 class App extends Component {
   state = {
     currentUser: {},
@@ -39,21 +40,26 @@ class App extends Component {
       <>
         <Switch>
           <Route exact path='/' render={() => <PrivateRoute
-            component={Needs}isUnmet={this.state.isUnmet} 
+            component={Needs} 
+            isUnmet={this.state.isUnmet} 
             toggleIsUnmet={this.toggleIsUnmet}
             isLoggedIn={this.state.isLoggedIn}
           />} />
           <Route exact path='/messages' render={() => <PrivateRoute
             component={Messages}
+            isLoggedIn={this.state.isLoggedIn}
           />} />
           <Route exact path='/add-a-need' render={() => <PrivateRoute
             component={AddANeed}
+            isLoggedIn={this.state.isLoggedIn}
           />} />
           <Route exact path='/my-needs' render={() => <PrivateRoute
             component={MyNeeds}
+            isLoggedIn={this.state.isLoggedIn}
           />} />
           <Route exact path='/more' render={() => <PrivateRoute
             component={More}
+            isLoggedIn={this.state.isLoggedIn}
           />} />
           <Route exact path='/login' component={Login} />
           <Route component={My404} />
