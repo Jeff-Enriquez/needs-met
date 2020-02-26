@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Firebase from '../Firebase/firebase';
-import styles from '../SignIn/Login.module.css';
+import Firebase from '../../../services/Firebase/firebase';
+import styles from '../Login.module.css';
 
 const Signup = ({ doSetCurrentUser, doAuth }) => {
   const [name, setName] = useState('')

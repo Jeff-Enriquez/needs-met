@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import styles from './Login.module.css';
-import Firebase from '../Firebase/firebase';
 import { Redirect } from 'react-router-dom';
-import Login from '../Login';
-import Signup from '../Signup';
+import Login from './Login';
+import Signup from './Signup';
 
 const Signin = ({ doSetCurrentUser, }) => {
   const [isLogin, setIsLogin] = useState(true)

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom'
 import './App.css';
-import SignIn from './components/SignIn';
-import Needs from './components/Needs';
-import Messages from './components/Messages';
-import AddANeed from './components/AddANeed';
-import MyNeeds from './components/MyNeeds';
-import More from './components/More';
-import My404 from './components/My404';
+import SignIn from './components/Signin';
 import PrivateRoute from './components/PrivateRoute'
+import Needs from './pages/Needs';
+import Messages from './pages/Messages';
+import AddANeed from './pages/AddANeed';
+import MyNeeds from './pages/MyNeeds';
+import More from './pages/More';
+import My404 from './pages/My404';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({})
