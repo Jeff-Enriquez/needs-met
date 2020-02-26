@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import './App.css';
-import Login from './components/Login';
+import SignIn from './components/SignIn';
 import Needs from './components/Needs';
 import Messages from './components/Messages';
 import AddANeed from './components/AddANeed';
@@ -23,7 +23,7 @@ const App = () => {
   const toggleIsUnmet = () => {
     setIsUnmet(!isUnmet)
   }
- 
+
   return (
     <>
       <Switch>
@@ -54,7 +54,15 @@ const App = () => {
           component={More}
           isLoggedIn={isLoggedIn}
         />
-        <Route exact path='/login' component={Login} />
+        <Route exact path='/signin' render={() => 
+          <SignIn doSetCurrentUser={doSetCurrentUser}/>
+        } />
+        <Route exact path='/login' render={() =>
+          <Redirect to='/signin' />
+        } />
+        <Route exact path='/signup' render={() =>
+          <Redirect to='/signin' />
+        } />
         <Route component={My404} />
       </Switch>
     </>

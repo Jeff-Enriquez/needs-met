@@ -14,7 +14,7 @@ const PrivateRoute = ({ component: Component, isLoggedIn, exact, path, ...rest }
     </>
     )} />
     : 
-    <Redirect to='/login' />
+    <Redirect to='/signin' />
 )
 
 export default PrivateRoute
