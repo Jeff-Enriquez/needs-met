@@ -10,9 +10,19 @@ const Login = ({ doSetCurrentUser, doAuth }) => {
   const handleForm = async e => {
     e.preventDefault()
     try {
-      await Firebase.doSignInWithEmailAndPassword(email, password);
-      doSetCurrentUser({
-        email,
+      const { user } = await Firebase.doSignInWithEmailAndPassword(email, password);
+      await Firebase.database.collection('Users').where('uid', "==", user.uid)
+      .get()
+      .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+            const { email, firstName, lastName, uid} = doc.data()
+            doSetCurrentUser({
+              email, firstName, lastName, uid
+            })
+          });
+      })
+      .catch(function(error) {
+          setError('Sorry, there is an error with your account')
       });
       doAuth();
     } catch (err) {

@@ -12,7 +12,7 @@ import My404 from './pages/My404';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({})
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isUnmet, setIsUnmet] = useState(true)
 
   const doSetCurrentUser = user => {
@@ -23,7 +23,7 @@ const App = () => {
   const toggleIsUnmet = () => {
     setIsUnmet(!isUnmet)
   }
-
+  
   return (
     <>
       <Switch>

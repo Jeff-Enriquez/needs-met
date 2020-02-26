@@ -26,7 +26,6 @@ const Signup = ({ doSetCurrentUser, doAuth }) => {
         firstName: firstName,
         lastName: lastName,
         email: email,
-        password: password1,
         uid: user.uid,
       })
       doSetCurrentUser({
