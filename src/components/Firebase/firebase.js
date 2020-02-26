@@ -1,4 +1,6 @@
 import app from 'firebase/app';
+
+import 'firebase/firestore';
 import 'firebase/auth';
 
 const config = {
@@ -13,8 +15,9 @@ const config = {
 
 class Firebase {
   constructor() {
-    app.initializeApp(config);
-    this.auth = app.auth();
+    app.initializeApp(config)
+    this.auth = app.auth()
+    this.database = app.firestore()
   }
 
   doCreateUserWithEmailAndPassword = (email, password) =>
