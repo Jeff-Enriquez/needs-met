@@ -28,6 +28,21 @@ class Firebase {
 
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
 
+  addANeed = (id, summary, details) => 
+    this.database.collection('Needs').add({
+      userId: id,
+      summary: summary,
+      details: details,
+    })
+    .then((doc) => {
+      this.database.collection('Users').doc(id).update({
+        myNeeds: firebase.firestore.FieldValue.arrayUnion(doc.id),
+      })
+    })
+    .catch(function(error) {
+        console.error("Error adding document: ", error);
+    });
+
   doSignOut = () => this.auth.signOut();
 }
 

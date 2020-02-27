@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Firebase from './services/Firebase/firebase'
 import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import SignIn from './components/Signin';
@@ -11,7 +12,7 @@ import More from './pages/More';
 import My404 from './pages/My404';
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState({})
+  const [currentUser, setCurrentUser] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isUnmet, setIsUnmet] = useState(true)
 
@@ -19,6 +20,17 @@ const App = () => {
     setCurrentUser(user)
     setIsLoggedIn(user ? true : false)
   }
+
+  useEffect(() => {
+    Firebase.auth.onAuthStateChanged(user => {
+      Firebase.database.collection('Users').where('authId', '==', user.uid)
+      .get()
+      .then((querySnapshot) => {
+        console.log(querySnapshot.docs[0].data())
+      }
+      )
+    })
+  }, [])
 
   const toggleIsUnmet = () => {
     setIsUnmet(!isUnmet)
@@ -42,6 +54,7 @@ const App = () => {
         exact path='/add-a-need'
         component={AddANeed}
         isLoggedIn={isLoggedIn}
+        currentUser={currentUser}
       />
       <PrivateRoute
         exact path='/my-needs'
