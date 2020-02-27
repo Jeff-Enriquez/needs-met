@@ -27,9 +27,11 @@ const Signup = ({ doSetCurrentUser, doAuth }) => {
         lastName: lastName,
         email: email,
         uid: user.uid,
+        messages: [],
+        myNeeds: [],
       })
       doSetCurrentUser({
-        email,
+        email, firstName, lastName, uid: user.uid,
       });
       doAuth();
     } catch (err) {
