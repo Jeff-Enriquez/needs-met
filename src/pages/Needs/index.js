@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Firebase from '../../services/Firebase/firebase'
+import Need from '../../components/Need';
 import styles from './Needs.module.css'
 
 const Needs = ({ isUnmet, toggleIsUnmet }) => {
+  const [needs, setNeeds] = useState(null)
+
+  useEffect(() => { 
+    const asyncFunction = async () => {
+      const needs = await Firebase.getAllUnmetNeeds()
+      setNeeds(needs.map((need, i) => (
+        <Need key={i} summary={need} />
+      )))
+    }
+    asyncFunction()
+  }, [])
+  
   return (
     <>
       <div className={styles.fixBtns}>
@@ -16,50 +30,11 @@ const Needs = ({ isUnmet, toggleIsUnmet }) => {
         </div>
       </div>
       <main className={styles.main}>
-        <div className={styles.needsContainer}>
-          <img src={process.env.PUBLIC_URL + '/images/profile1.jpg'} alt='profile'/>
-          <p>This is a comment of what my posted need is.</p>
-        </div>
-        <div className={styles.needsContainer}>
-          <img src={process.env.PUBLIC_URL + '/images/profile2.jpeg'} alt='profile'/>
-          <p>This is a comment of what my posted need is.</p>
-        </div>
-        <div className={styles.needsContainer}>
-          <img src={process.env.PUBLIC_URL + '/images/profile2.jpeg'} alt='profile'/>
-          <p>This is a comment of what my posted need is.</p>
-        </div>
-        <div className={styles.needsContainer}>
-          <img src={process.env.PUBLIC_URL + '/images/profile1.jpg'} alt='profile'/>
-          <p>This is a comment of what my posted need is.</p>
-        </div>
-        <div className={styles.needsContainer}>
-          <img src={process.env.PUBLIC_URL + '/images/profile2.jpeg'} alt='profile'/>
-          <p>This is a comment of what my posted need is.</p>
-        </div>
-        <div className={styles.needsContainer}>
-          <img src={process.env.PUBLIC_URL + '/images/profile2.jpeg'} alt='profile'/>
-          <p>This is a comment of what my posted need is.</p>
-        </div>
-        <div className={styles.needsContainer}>
-          <img src={process.env.PUBLIC_URL + '/images/profile1.jpg'} alt='profile'/>
-          <p>This is a comment of what my posted need is.</p>
-        </div>
-        <div className={styles.needsContainer}>
-          <img src={process.env.PUBLIC_URL + '/images/profile2.jpeg'} alt='profile'/>
-          <p>This is a comment of what my posted need is.</p>
-        </div>
-        <div className={styles.needsContainer}>
-          <img src={process.env.PUBLIC_URL + '/images/profile2.jpeg'} alt='profile'/>
-          <p>This is a comment of what my posted need is.</p>
-        </div>
-        <div className={styles.needsContainer}>
-          <img src={process.env.PUBLIC_URL + '/images/profile1.jpg'} alt='profile'/>
-          <p>This is a comment of what my posted need is.</p>
-        </div>
-        <div className={styles.needsContainer}>
-          <img src={process.env.PUBLIC_URL + '/images/profile1.jpg'} alt='profile'/>
-          <p>This is a comment of what my posted need is.</p>
-        </div>
+        {needs ? (
+          needs
+        ) : (
+          <p>ADD LOADING ICON</p>
+        )}
       </main>
     </> 
   );

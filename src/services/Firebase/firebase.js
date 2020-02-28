@@ -28,11 +28,27 @@ class Firebase {
 
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
 
+  getAllUnmetNeeds = () =>
+    this.database.collection('Needs').where('met', '==', false)
+    .get()
+    .then((querySnapshot) => {
+      const unmetNeeds = []
+      querySnapshot.forEach(function(doc) {
+        const { summary } = doc.data()
+        unmetNeeds.push(summary)
+      });
+      return unmetNeeds
+    })
+    .catch(function(error) {
+      
+    });
+
   addANeed = (id, summary, details) => 
     this.database.collection('Needs').add({
       userId: id,
       summary: summary,
       details: details,
+      met: false,
     })
     .then((doc) => {
       this.database.collection('Users').doc(id).update({
@@ -40,7 +56,7 @@ class Firebase {
       })
     })
     .catch(function(error) {
-        console.error("Error adding document: ", error);
+      
     });
 
   doSignOut = () => this.auth.signOut();

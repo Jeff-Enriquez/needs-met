@@ -35,6 +35,12 @@
   right: 10px;
 }
 
+.blue {
+  color: blue;
+}
+
+
+
 .needsContainer {
   display: grid;
   grid-template-columns: 40px auto;
@@ -55,8 +61,4 @@
 
 .needsContainer p {
   margin-left: 10px;
-}
-
-.blue {
-  color: blue;
 }

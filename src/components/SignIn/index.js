@@ -4,9 +4,9 @@ import { Redirect } from 'react-router-dom';
 import Login from './Login';
 import Signup from './Signup';
 
-const Signin = ({ doSetCurrentUser, }) => {
+const Signin = ({ currentUser, doSetCurrentUser, }) => {
   const [isLogin, setIsLogin] = useState(true)
-  const [isAuth, setIsAuth] = useState(false)
+  const [isAuth, setIsAuth] = useState(currentUser)
 
   const doAuth = () => {
     setIsAuth(true)

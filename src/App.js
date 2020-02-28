@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Firebase from './services/Firebase/firebase'
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import './App.css';
 import SignIn from './components/Signin';
 import PrivateRoute from './components/PrivateRoute';
@@ -11,7 +11,7 @@ import MyNeeds from './pages/MyNeeds';
 import More from './pages/More';
 import My404 from './pages/My404';
 
-const App = () => {
+const App = (props) => {
   const [currentUser, setCurrentUser] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isUnmet, setIsUnmet] = useState(true)
@@ -23,13 +23,18 @@ const App = () => {
 
   useEffect(() => {
     Firebase.auth.onAuthStateChanged(user => {
-      Firebase.database.collection('Users').where('authId', '==', user.uid)
-      .get()
-      .then((querySnapshot) => {
-        console.log(querySnapshot.docs[0].data())
+      if(user){
+        Firebase.database.collection('Users').where('authId', '==', user.uid)
+        .get()
+        .then((querySnapshot) => {
+          doSetCurrentUser(querySnapshot.docs[0].data())
+          props.history.push('/')
+        })
+      } else {
+        doSetCurrentUser(undefined)
       }
-      )
-    })
+    }
+    )
   }, [])
 
   const toggleIsUnmet = () => {
@@ -67,7 +72,10 @@ const App = () => {
         isLoggedIn={isLoggedIn}
       />
       <Route exact path='/signin' render={() => 
-        <SignIn doSetCurrentUser={doSetCurrentUser}/>
+        <SignIn 
+          doSetCurrentUser={doSetCurrentUser}
+          currentUser={currentUser}
+        />
       } />
       <Route exact path='/login' render={() =>
         <Redirect to='/signin' />
@@ -80,4 +88,4 @@ const App = () => {
   )
 }
 
-export default App;
+export default withRouter(App);
