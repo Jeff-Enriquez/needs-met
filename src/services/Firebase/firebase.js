@@ -66,6 +66,13 @@ class Firebase {
     .catch(function(error) {
       
     });
+
+  getANeed = (id) => this.database.collection('Needs').doc(id).get()
+    .then((doc) => doc.data())
+
+  getUserByNeed = (id) =>  this.database.collection('Users')
+    .where('myNeeds', 'array-contains', id).limit(1).get()
+    .then((doc) => doc.docs['0'].data())
     
 }
 

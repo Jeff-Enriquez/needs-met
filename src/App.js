@@ -18,7 +18,7 @@ const App = (props) => {
   const [isUnmet, setIsUnmet] = useState(true)
 
   const doSetCurrentUser = user => {
-    console.log(user)
+    console.log('app-user',user)
     setCurrentUser(user)
     setIsLoggedIn(user ? true : false)
   }
