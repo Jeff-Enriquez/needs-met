@@ -5,6 +5,7 @@ import './App.css';
 import SignIn from './components/Signin';
 import PrivateRoute from './components/PrivateRoute';
 import Needs from './pages/Needs';
+import NeedDetail from './pages/NeedDetail';
 import Messages from './pages/Messages';
 import AddANeed from './pages/AddANeed';
 import MyNeeds from './pages/MyNeeds';
@@ -32,7 +33,7 @@ const App = (props) => {
             const user = doc.data()
             user['id'] = doc.id
             doSetCurrentUser(user)
-            props.history.push('/')
+            props.history.push('/needs')
           }
         })
       }
@@ -44,8 +45,12 @@ const App = (props) => {
 
   return (
     <Switch>
+      <PrivateRoute 
+        exact path='/needs/:id'
+        component={NeedDetail}
+      />
       <PrivateRoute
-        exact path='/'
+        exact path='/needs'
         component={Needs} 
         isUnmet={isUnmet} 
         toggleIsUnmet={toggleIsUnmet}
@@ -72,6 +77,9 @@ const App = (props) => {
         component={More}
         isLoggedIn={isLoggedIn}
       />
+      <Route exact path='/' render={() =>
+        <Redirect to='/needs' />
+      } />
       <Route exact path='/signin' render={() => 
         <SignIn 
           doSetCurrentUser={doSetCurrentUser}

@@ -9,9 +9,11 @@ const Needs = ({ isUnmet, toggleIsUnmet }) => {
   useEffect(() => { 
     const asyncFunction = async () => {
       const needs = await Firebase.getAllUnmetNeeds()
-      setNeeds(needs.map((need, i) => (
-        <Need key={i} summary={need} />
-      )))
+      if(needs) {
+        setNeeds(needs.map((need, i) => (
+          <Need key={i} id={need.id} summary={need.summary} created={need.created}/>
+        )))
+      }
     }
     asyncFunction()
   }, [])
@@ -35,7 +37,7 @@ const Needs = ({ isUnmet, toggleIsUnmet }) => {
           {needs}
           </>
         ) : (
-          <p>ADD LOADING ICON</p>
+          <p>There are no needs</p>
         )}
       </main>
     </> 

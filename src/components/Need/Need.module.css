@@ -16,22 +16,30 @@
   border-radius: 50%;
 }
 
-.needsContainer div {
+.a {
+  text-decoration: none;
+  color: inherit;
   overflow: auto;
   margin-left: 10px;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
-.needsContainer div p {
-  overflow-wrap: break-word;
-}
-
-.needsContainer div p:first-of-type {
-  font-size: 10px;
+.infoContainer span, p:first-of-type {
   font-weight: bold;
 }
 
-.needsContainer div p:last-of-type {
+.infoContainer span {
+  font-size: 10px;
+  color: gray;
+}
+
+.infoContainer p:first-of-type {
+  font-size: 12px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.infoContainer p:last-of-type {
   font-size: 14px;
 }

@@ -32,17 +32,22 @@ class Firebase {
 
   getAllUnmetNeeds = () =>
     this.database.collection('Needs').where('met', '==', false)
+    .orderBy("created", 'desc')
     .get()
     .then((querySnapshot) => {
       const unmetNeeds = []
       querySnapshot.forEach(function(doc) {
-        const { summary } = doc.data()
-        unmetNeeds.push(summary)
+        const { summary, created } = doc.data()
+        unmetNeeds.push({
+          id: doc.id,
+          summary: summary, 
+          created: created.toDate().toString().slice(0,21)
+        })
       });
       return unmetNeeds
     })
     .catch(function(error) {
-      
+      console.log(error)
     });
 
   addANeed = (id, summary, details) => 
@@ -51,15 +56,17 @@ class Firebase {
       summary: summary,
       details: details,
       met: false,
+      created: app.firestore.Timestamp.now(),
     })
     .then((doc) => {
       this.database.collection('Users').doc(id).update({
-        myNeeds: firebase.firestore.FieldValue.arrayUnion(doc.id),
+        myNeeds: app.firestore.FieldValue.arrayUnion(doc.id),
       })
     })
     .catch(function(error) {
       
     });
+    
 }
 
 const firebase = new Firebase();

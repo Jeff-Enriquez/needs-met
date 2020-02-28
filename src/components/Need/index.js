@@ -1,14 +1,18 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 import styles from './Need.module.css'
 
-const Need = ({ summary }) => {
+const Need = ({ id, summary, created }) => {
+  console.log(id)
   return (
     <div className={styles.needsContainer}>
       <img src={process.env.PUBLIC_URL + '/images/blank-profile.png'} alt='profile'/>
-      <div>
-        <p>Name</p>
-        <p>{ summary }</p>
-      </div>
+      <NavLink className={styles.a} exact to={`/needs/${id}`}>
+        <div className={styles.infoContainer}>
+          <p>Name</p> <span>{ created }</span>
+          <p>{ summary }</p>
+        </div>
+      </NavLink>
     </div>
   )
 }
