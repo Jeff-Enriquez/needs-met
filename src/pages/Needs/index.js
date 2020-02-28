@@ -31,7 +31,9 @@ const Needs = ({ isUnmet, toggleIsUnmet }) => {
       </div>
       <main className={styles.main}>
         {needs ? (
-          needs
+          <>
+          {needs}
+          </>
         ) : (
           <p>ADD LOADING ICON</p>
         )}
