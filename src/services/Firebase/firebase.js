@@ -28,6 +28,8 @@ class Firebase {
 
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
 
+  doSignOut = () => this.auth.signOut();
+
   getAllUnmetNeeds = () =>
     this.database.collection('Needs').where('met', '==', false)
     .get()
@@ -58,8 +60,6 @@ class Firebase {
     .catch(function(error) {
       
     });
-
-  doSignOut = () => this.auth.signOut();
 }
 
 const firebase = new Firebase();

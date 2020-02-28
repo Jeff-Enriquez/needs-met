@@ -16,6 +16,15 @@
   border-radius: 50%;
 }
 
-.needsContainer p {
+.needsContainer div {
   margin-left: 10px;
+}
+
+.needsContainer div p:first-of-type {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.needsContainer div p:last-of-type {
+  font-size: 14px;
 }

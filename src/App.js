@@ -24,18 +24,16 @@ const App = (props) => {
   useEffect(() => {
     Firebase.auth.onAuthStateChanged(user => {
       if(user){
-        Firebase.database.collection('Users').where('authId', '==', user.uid)
+        Firebase.database.collection('Users').doc(user.uid)
         .get()
-        .then((querySnapshot) => {
-          doSetCurrentUser(querySnapshot.docs[0].data())
-          props.history.push('/')
+        .then((doc) => {
+          if(doc.exists) {
+            doSetCurrentUser(doc.data())
+            props.history.push('/')
+          }
         })
-      } else {
-        doSetCurrentUser(undefined)
       }
-    }
-    )
-  }, [])
+    })}, [])
 
   const toggleIsUnmet = () => {
     setIsUnmet(!isUnmet)
