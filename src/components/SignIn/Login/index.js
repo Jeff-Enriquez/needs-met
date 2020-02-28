@@ -11,16 +11,14 @@ const Login = ({ doSetCurrentUser, doAuth }) => {
     e.preventDefault()
     try {
       const { user } = await Firebase.doSignInWithEmailAndPassword(email, password);
-      await Firebase.database.collection('Users').where('authId', "==", user.uid)
+      await Firebase.database.collection('Users').doc(user.uid)
       .get()
-      .then(function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-            const { email, firstName, lastName, authId} = doc.data()
-            const id = doc.id
-            doSetCurrentUser({
-              id, email, firstName, lastName, authId
-            })
-          });
+      .then(function(doc) {
+        if(doc.exists) {
+          const currentUser = doc.data()
+          currentUser['id'] = doc.id
+          doSetCurrentUser(currentUser)
+        }
       })
       .catch(function(error) {
           setError('Sorry, there is an error with your account')

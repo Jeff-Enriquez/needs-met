@@ -17,6 +17,7 @@ const App = (props) => {
   const [isUnmet, setIsUnmet] = useState(true)
 
   const doSetCurrentUser = user => {
+    console.log(user)
     setCurrentUser(user)
     setIsLoggedIn(user ? true : false)
   }
@@ -28,12 +29,14 @@ const App = (props) => {
         .get()
         .then((doc) => {
           if(doc.exists) {
-            doSetCurrentUser(doc.data())
+            const user = doc.data()
+            user['id'] = doc.id
+            doSetCurrentUser(user)
             props.history.push('/')
           }
         })
       }
-    })}, [])
+  })}, [])
 
   const toggleIsUnmet = () => {
     setIsUnmet(!isUnmet)

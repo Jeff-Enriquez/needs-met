@@ -32,7 +32,9 @@ const Signup = ({ doSetCurrentUser, doAuth }) => {
         }).then(
           Firebase.database.collection('Users').doc(user.uid).get()
           .then((doc) => {
-            doSetCurrentUser(doc.data())
+            const currentUser = doc.data()
+            currentUser['id'] = doc.id
+            doSetCurrentUser(currentUser)
           })
         )
       })
