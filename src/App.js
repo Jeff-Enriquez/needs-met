@@ -48,6 +48,7 @@ const App = (props) => {
       <PrivateRoute 
         exact path='/needs/:id'
         component={NeedDetail}
+        isLoggedIn={isLoggedIn}
       />
       <PrivateRoute
         exact path='/needs'

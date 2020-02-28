@@ -36,7 +36,8 @@
   color: #fff;
   background-color: #269CE9;
   border-color: #269CE9;
-  text-shadow: 0 1px 0 rgba(0,0,0,.2); background-image: linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
+  text-shadow: 0 1px 0 rgba(0,0,0,.2); 
+  background-image: linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
   transition: background-color .2s ease-out;
   border-radius: 3px;
 }
