@@ -9,10 +9,9 @@ const NeedDetail = (props) => {
   const [details, setDetails] = useState('')
   const [created, setCreated] = useState('')
 
-  const needId = props.computedMatch.params.id
-
   useEffect(() => {
     const asyncFunction = async () => {
+      const needId = await props.computedMatch.params.id
       const { firstName, lastName, photoURL } = await Firebase.getUserByNeed(needId)
       setFirstName(firstName)
       setLastName(lastName)

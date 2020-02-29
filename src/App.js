@@ -77,6 +77,7 @@ const App = (props) => {
         exact path='/more'
         component={More}
         isLoggedIn={isLoggedIn}
+        currentUser={currentUser}
       />
       <Route exact path='/' render={() =>
         <Redirect to='/needs' />

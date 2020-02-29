@@ -30,50 +30,55 @@ class Firebase {
 
   doSignOut = () => this.auth.signOut();
 
-  getAllUnmetNeeds = () =>
-    this.database.collection('Needs').where('met', '==', false)
-    .orderBy("created", 'desc')
-    .get()
-    .then((querySnapshot) => {
-      const unmetNeeds = []
-      querySnapshot.forEach(function(doc) {
+  getAllUnmetNeeds = async () => {
+    const unmetNeeds = []
+    try {
+      const querySnapshot = await this.database.collection('Needs').where('met', '==', false)
+      .orderBy("created", 'desc').get()
+      querySnapshot.forEach((doc) => {
         const { summary, created } = doc.data()
         unmetNeeds.push({
           id: doc.id,
           summary: summary, 
           created: created.toDate().toString().slice(0,21)
         })
-      });
+      })
       return unmetNeeds
-    })
-    .catch(function(error) {
-      console.log(error)
-    });
+    } catch(error) {
 
-  addANeed = (id, summary, details) => 
-    this.database.collection('Needs').add({
-      userId: id,
-      summary: summary,
-      details: details,
-      met: false,
-      created: app.firestore.Timestamp.now(),
-    })
-    .then((doc) => {
-      this.database.collection('Users').doc(id).update({
+    }
+  }
+
+  addANeed = async (id, summary, details) => {
+    try{
+      const doc = await this.database.collection('Needs').add({
+        userId: id,
+        summary: summary,
+        details: details,
+        met: false,
+        created: app.firestore.Timestamp.now(),
+      })
+      await this.database.collection('Users').doc(id).update({
         myNeeds: app.firestore.FieldValue.arrayUnion(doc.id),
       })
-    })
-    .catch(function(error) {
-      
-    });
+      return doc.id
+    } catch (error) {
+
+    }
+  }
 
   getANeed = (id) => this.database.collection('Needs').doc(id).get()
     .then((doc) => doc.data())
 
   getUserByNeed = (id) =>  this.database.collection('Users')
     .where('myNeeds', 'array-contains', id).limit(1).get()
-    .then((doc) => doc.docs['0'].data())
+    .then((doc) => doc.docs['0'] && doc.docs['0'].data())
     
+  updateUserPhoto = async (id, url) => {
+    await this.database.collection('Users').doc(id).update({
+      photoURL: url,
+    })
+  }
 }
 
 const firebase = new Firebase();
