@@ -21,23 +21,18 @@ const Signup = ({ doSetCurrentUser, doAuth }) => {
     e.preventDefault();
     if(isInvalid){ return } else {
     try {
-      await Firebase.doCreateUserWithEmailAndPassword(email, password1)
-      .then(({ user }) => {
-        Firebase.database.collection('Users').doc(user.uid).set({
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          messages: [],
-          myNeeds: [],
-        }).then(
-          Firebase.database.collection('Users').doc(user.uid).get()
-          .then((doc) => {
-            const currentUser = doc.data()
-            currentUser['id'] = doc.id
-            doSetCurrentUser(currentUser)
-          })
-        )
+      const { user } = await Firebase.doCreateUserWithEmailAndPassword(email, password1)
+      await Firebase.database.collection('Users').doc(user.uid).set({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        messages: [],
+        myNeeds: [],
       })
+      const doc = await Firebase.database.collection('Users').doc(user.uid).get()
+      const currentUser = doc.data()
+      currentUser['id'] = doc.id
+      await doSetCurrentUser(currentUser)
       doAuth();
     } catch (err) {
       setError(err)

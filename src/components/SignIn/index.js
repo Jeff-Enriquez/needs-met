@@ -9,14 +9,13 @@ const Signin = ({ currentUser, doSetCurrentUser, }) => {
   const [isAuth, setIsAuth] = useState(currentUser)
 
   const doAuth = () => {
+    console.log('doAuth')
     setIsAuth(true)
   }
 
-  if (isAuth) {
-    return <Redirect to='/' />
-  }
-
   return (
+    <>
+    {isAuth && <Redirect to='/' />}
     <main className={styles.main}>
       <div className={styles.formStructor}>
         <div className={isLogin ? styles.login : `${styles.login} ${styles.slideUp}`}>
@@ -35,6 +34,7 @@ const Signin = ({ currentUser, doSetCurrentUser, }) => {
         </div>
       </div>
     </main>
+    </>
   );
 }
 

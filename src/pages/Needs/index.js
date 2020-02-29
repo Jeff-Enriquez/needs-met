@@ -3,7 +3,7 @@ import Firebase from '../../services/Firebase/firebase'
 import Need from '../../components/Need';
 import styles from './Needs.module.css'
 
-const Needs = ({ isUnmet, toggleIsUnmet }) => {
+const Needs = ({ isUnmet, toggleIsUnmet, currentUser }) => {
   const [needs, setNeeds] = useState(null)
 
   useEffect(() => { 
@@ -11,7 +11,9 @@ const Needs = ({ isUnmet, toggleIsUnmet }) => {
       const needs = await Firebase.getAllUnmetNeeds()
       if(needs) {
         setNeeds(needs.map((need, i) => (
-          <Need key={i} id={need.id} summary={need.summary} created={need.created}/>
+          <Need key={i} id={need.id} summary={need.summary} 
+            created={need.created} currentUser={currentUser}
+          />
         )))
       }
     }
