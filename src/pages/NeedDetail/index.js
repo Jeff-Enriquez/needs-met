@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Firebase from '../../services/Firebase/firebase'
+import Firebase from '../../services/Firebase/firebase';
+import styles from './NeedDetail.module.css';
 
 const NeedDetail = (props) => {
   const [firstName, setFirstName] = useState('')
@@ -25,15 +26,26 @@ const NeedDetail = (props) => {
   }, [])
 
   return (
-    firstName ? 
-    <>
-      <h1>{firstName} {lastName}</h1>
-      <h3>{created}</h3>
-      <p>summary: {summary}</p>
-      <p>details: {details}</p>
-    </>
-    :
-    <h1>You made it</h1>
+    <main className={styles.main}>
+    {firstName ? 
+      <>
+      <div className={styles.profContainer}>
+        <img className={styles.img} src={photoURL ? photoURL : process.env.PUBLIC_URL + '/images/blank-profile.png'} alt='profile'/>
+        <h1 className ={styles.h1}>{firstName} {lastName}</h1>
+      </div>
+      <div className={styles.infoContainer}>
+        <p className={styles.date}>Posted on: {created}</p>
+        <h2 className={styles.h2}>Need Summary:</h2>
+        <p className={styles.info}>{summary}</p>
+        <h2 className={styles.h2}>Need Details:</h2>
+        <p className={styles.info}>{details}</p>
+      </div>
+      <button className={styles.button}>Contact</button>
+      </>
+      :
+      <></>
+    }
+    </main>
   )
 }
 

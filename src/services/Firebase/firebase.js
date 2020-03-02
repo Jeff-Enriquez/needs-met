@@ -38,12 +38,12 @@ class Firebase {
       const { docs } = querySnapshot
       for(let i = 0; i < docs.length; i++){
         const { summary, created, userId } = docs[i].data()
-        const photo = await this.getUserPhoto(userId)
+        const user = await this.getUserById(userId)
         needs.push({
           id: docs[i].id,
           summary: summary, 
           created: created.toDate().toString().slice(0,21),
-          photoURL: photo,
+          user: user,
         })
       }
       return needs
@@ -52,9 +52,9 @@ class Firebase {
     }
   }
 
-  getUserPhoto = async id => {
+  getUserById = async id => {
     const user = await this.database.collection('Users').doc(id).get()
-    return user.data().photoURL
+    return user.data()
   }
 
   addANeed = async (id, summary, details) => {

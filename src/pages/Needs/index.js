@@ -12,7 +12,7 @@ const Needs = ({ isUnmet, toggleIsUnmet, currentUser }) => {
       if(needs) {
         setNeeds(needs.map((need, i) => (
           <Need key={i} id={need.id} summary={need.summary} 
-            created={need.created} photo={need.photoURL}
+            created={need.created} user={need.user}
           />
         )))
       }
