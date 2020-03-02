@@ -9,7 +9,6 @@ const Signin = ({ currentUser, doSetCurrentUser, }) => {
   const [isAuth, setIsAuth] = useState(currentUser)
 
   const doAuth = () => {
-    console.log('doAuth')
     setIsAuth(true)
   }
 

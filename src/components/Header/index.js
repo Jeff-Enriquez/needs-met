@@ -8,7 +8,7 @@ function Header() {
       <div>
         <div className={styles.container}>
           <img className={styles.logo} src={process.env.PUBLIC_URL + '/images/sandals.png'} alt='church logo'/>
-          <h1>Church Name</h1>
+          <h1>Needs Met</h1>
         </div>
       </div>
       <img className={styles.dots} src={process.env.PUBLIC_URL + '/images/dots.png'} alt='hamburger icon' />

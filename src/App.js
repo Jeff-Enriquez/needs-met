@@ -17,25 +17,24 @@ const App = (props) => {
   const [isUnmet, setIsUnmet] = useState(true)
 
   const doSetCurrentUser = user => {
-    console.log('app-user',user)
     setCurrentUser(user)
   }
 
-  // useEffect(() => {
-  //   Firebase.auth.onAuthStateChanged(user => {
-  //     if(user){
-  //       Firebase.database.collection('Users').doc(user.uid)
-  //       .get()
-  //       .then((doc) => {
-  //         if(doc.exists) {
-  //           const user = doc.data()
-  //           user['id'] = doc.id
-  //           doSetCurrentUser(user)
-  //           props.history.push('/needs')
-  //         }
-  //       })
-  //     }
-  // })}, [])
+  useEffect(() => {
+    Firebase.auth.onAuthStateChanged(user => {
+      if(user){
+        Firebase.database.collection('Users').doc(user.uid)
+        .get()
+        .then((doc) => {
+          if(doc.exists) {
+            const user = doc.data()
+            user['id'] = doc.id
+            doSetCurrentUser(user)
+            props.history.push('/needs')
+          }
+        })
+      }
+  })}, [])
 
   const toggleIsUnmet = () => {
     setIsUnmet(!isUnmet)
@@ -43,7 +42,6 @@ const App = (props) => {
 
   return (
     <Switch>
-    {console.log(props.location.pathname)}
       <PrivateRoute 
         exact path='/needs/:id'
         component={NeedDetail}

@@ -8,11 +8,11 @@ const Needs = ({ isUnmet, toggleIsUnmet, currentUser }) => {
 
   useEffect(() => { 
     const asyncFunction = async () => {
-      const needs = await Firebase.getAllUnmetNeeds()
+      const needs = await Firebase.getNeeds()
       if(needs) {
         setNeeds(needs.map((need, i) => (
           <Need key={i} id={need.id} summary={need.summary} 
-            created={need.created} currentUser={currentUser}
+            created={need.created} photo={need.photoURL}
           />
         )))
       }

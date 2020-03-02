@@ -30,23 +30,31 @@ class Firebase {
 
   doSignOut = () => this.auth.signOut();
 
-  getAllUnmetNeeds = async () => {
-    const unmetNeeds = []
+  getNeeds = async () => {
+    const needs = []
     try {
       const querySnapshot = await this.database.collection('Needs').where('met', '==', false)
       .orderBy("created", 'desc').get()
-      querySnapshot.forEach((doc) => {
-        const { summary, created } = doc.data()
-        unmetNeeds.push({
-          id: doc.id,
+      const { docs } = querySnapshot
+      for(let i = 0; i < docs.length; i++){
+        const { summary, created, userId } = docs[i].data()
+        const photo = await this.getUserPhoto(userId)
+        needs.push({
+          id: docs[i].id,
           summary: summary, 
-          created: created.toDate().toString().slice(0,21)
+          created: created.toDate().toString().slice(0,21),
+          photoURL: photo,
         })
-      })
-      return unmetNeeds
+      }
+      return needs
     } catch(error) {
 
     }
+  }
+
+  getUserPhoto = async id => {
+    const user = await this.database.collection('Users').doc(id).get()
+    return user.data().photoURL
   }
 
   addANeed = async (id, summary, details) => {

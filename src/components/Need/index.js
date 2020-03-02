@@ -2,11 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import styles from './Need.module.css'
 
-const Need = ({ id, summary, created, currentUser }) => {
+const Need = ({ id, summary, created, photo }) => {
   return (
     <div className={styles.needsContainer}>
-      {currentUser.photoURL ?
-        <img src={currentUser.photoURL} alt='profile'/>
+      {photo ?
+        <img src={photo} alt='profile'/>
         :
         <img src={process.env.PUBLIC_URL + '/images/blank-profile.png'} alt='profile'/>
       }
