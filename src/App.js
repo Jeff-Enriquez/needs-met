@@ -11,6 +11,7 @@ import AddANeed from './pages/AddANeed';
 import MyNeeds from './pages/MyNeeds';
 import More from './pages/More';
 import My404 from './pages/My404';
+import DirectMessage from './pages/DirectMessage'
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(null)
@@ -58,6 +59,13 @@ const App = (props) => {
         exact path='/messages'
         component={Messages}
         currentUser={currentUser}
+        user={currentUser}
+      />
+      <PrivateRoute
+        exact path='/messages/id'
+        component={DirectMessage}
+        currentUser={currentUser}
+        user={{}}
       />
       <PrivateRoute
         exact path='/add-a-need'

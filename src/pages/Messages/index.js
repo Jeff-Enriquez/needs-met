@@ -1,12 +1,21 @@
-import React from 'react';
-import styles from './Messages.module.css';
+import React from 'react'
+import { Link } from 'react-router-dom';
+import styles from './Messages.module.css'
 
-function Messages() {
+const Messages = ({ user }) => {
+  const id = user.id
   return (
-    <>
-      <h1>Messages</h1>
-    </> 
-  );
+    <main className={styles.main}>
+      <div className={styles.needsContainer}>
+        <img src={user.photoURL ? user.photoURL : process.env.PUBLIC_URL + '/images/blank-profile.png'} alt='profile'/>
+        <Link className={styles.a} to={`/messages/id`}>
+          <div className={styles.infoContainer}>
+            <p className={styles.name}>{`${user.firstName} ${user.lastName}`}</p>
+          </div>
+        </Link>
+      </div>
+    </main>
+  )
 }
 
 export default Messages;

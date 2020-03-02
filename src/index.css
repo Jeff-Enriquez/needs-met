@@ -1,5 +1,8 @@
 :root {
   --app-color: rgb(0, 0, 100);
+  --text1: #333;
+  --text2: #666;
+  --text3: #999;
 }
 
 body {

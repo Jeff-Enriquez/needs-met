@@ -12,7 +12,7 @@ const Need = ({ id, summary, created, user }) => {
       }
       <Link className={styles.a} to={`/needs/${id}`}>
         <div className={styles.infoContainer}>
-          <p>{`${user.firstName} ${user.lastName}`}</p> <span>{ created }</span>
+          <p className={styles.name}>{`${user.firstName} ${user.lastName}`}</p> <span>{ created }</span>
           <p>{ summary }</p>
         </div>
       </Link>

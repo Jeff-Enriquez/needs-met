@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css?family=Red+Hat+Display:400,500,900&display=swap');
+
+.contactBar {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  background-color: rgb(197, 234, 247);
+}
+
+.contactBar * {
+  margin: 0;
+}
+
+.pic {
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.name {
+  display: inline;
+  margin-left: 10px;
+}
+
+.chatBox {
+  box-sizing: border-box;
+  font-family: 'Red hat Display', sans-serif;
+  font-weight: 500;
+	line-height: 1.25em;
+	letter-spacing: 0.025em;
+  color: --text1;
+  margin: 0 10px;
+}
+
+.message {
+  padding: 0.5rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  width: fit-content;
+  max-width: 66%;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+}
+
+.currentUserMessage{
+  border-radius: 1.125rem 1.125rem 0 1.125rem;
+  background-color: black;
+  color: white;
+  float: right;
+}
+
+.userMessage {
+  border-radius: 1.125rem 1.125rem 1.125rem 0;
+  background-color: rgb(250, 250, 250);
+  clear: right;
+}
+		
+.inputContainer {
+  box-sizing: border-box;
+  flex-basis: 4rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem 0 1.5rem;
+}
+
+.inputContainer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  margin-bottom: 79px;
+  display: flex;
+  justify-content: space-around;
+  background-color: rgb(197, 234, 247);
+  align-items: center;
+	padding: .5rem 0;
+}
+
+.input {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 1.125rem;
+  margin: 0 1rem;
+  width: 100%;
+  box-shadow: 0 0 0.5rem rgb(167, 233, 254);
+  font-family: 'Red hat Display', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+
+.input::placeholder {
+  color: --text3;
+}
+
+.img {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 1rem;
+}
