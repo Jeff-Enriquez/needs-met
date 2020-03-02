@@ -26,7 +26,7 @@ const Signup = ({ doSetCurrentUser, doAuth }) => {
         firstName: firstName,
         lastName: lastName,
         email: email,
-        messages: [],
+        chats: [],
         myNeeds: [],
       })
       const doc = await Firebase.database.collection('Users').doc(user.uid).get()

@@ -59,13 +59,11 @@ const App = (props) => {
         exact path='/messages'
         component={Messages}
         currentUser={currentUser}
-        user={currentUser}
       />
       <PrivateRoute
         exact path='/messages/:id'
         component={DirectMessage}
         currentUser={currentUser}
-        user={{}}
       />
       <PrivateRoute
         exact path='/add-a-need'

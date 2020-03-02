@@ -52,6 +52,23 @@ class Firebase {
     }
   }
 
+  getUserChats = async (id) => {
+    const user = await this.database.collection('Users').doc(id).get()
+    return user.data().chats
+  }
+
+  getChat = async (id) => {
+    const chat = await this.database.collection('Chats').doc(id).get()
+    return chat.data()
+  }
+
+  createChat = async (id1, id2) => {
+    return await this.database.collection('Chats').add({
+      [id1]: [],
+      [id2]: [],
+    })
+  }
+
   getUserById = async id => {
     const user = await this.database.collection('Users').doc(id).get()
     return user.data()
