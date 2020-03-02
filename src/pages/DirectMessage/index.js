@@ -1,9 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './DirectMessage.module.css'
 const DirectMessage = ({ currentUser, user }) => {
   return (
     <>
       <div className={styles.contactBar}>
+        <Link to='/messages' className={styles.arrow}>&#8592;</Link>
         <img className={styles.pic} src={user.photoURL ? user.photoURL : process.env.PUBLIC_URL + '/images/blank-profile.png'} alt='profile'/>
         <p className={styles.name}>User Name</p>
       </div>
