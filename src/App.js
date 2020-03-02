@@ -62,7 +62,7 @@ const App = (props) => {
         user={currentUser}
       />
       <PrivateRoute
-        exact path='/messages/id'
+        exact path='/messages/:id'
         component={DirectMessage}
         currentUser={currentUser}
         user={{}}

@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Firebase from '../../services/Firebase/firebase';
+import { Link } from 'react-router-dom';
 import styles from './NeedDetail.module.css';
 
 const NeedDetail = (props) => {
+  const { currentUser } = props;
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [photoURL, setPhotoURL] = useState('')
   const [summary, setSummary] = useState('')
   const [details, setDetails] = useState('')
   const [created, setCreated] = useState('')
+  const [userId, setUserId] = useState('')
+  const [isBtn, setIsBtn] = useState(false)
 
   useEffect(() => {
     const asyncFunction = async () => {
@@ -17,7 +21,9 @@ const NeedDetail = (props) => {
       setFirstName(firstName)
       setLastName(lastName)
       setPhotoURL(photoURL)
-      const { summary, details, created } = await Firebase.getANeed(needId)
+      const { summary, details, created, userId } = await Firebase.getANeed(needId)
+      setIsBtn(userId !== currentUser.id ? true : false)
+      setUserId(userId)
       setSummary(summary)
       setDetails(details)
       setCreated(created.toDate().toString().slice(0,21))
@@ -40,7 +46,9 @@ const NeedDetail = (props) => {
         <h2 className={styles.h2}>Need Details:</h2>
         <p className={styles.info}>{details}</p>
       </div>
-      <button className={styles.button}>Contact</button>
+      {isBtn &&
+      <Link to={`/messages/${userId}`} className={styles.button}>Contact</Link>
+      }
       </>
       :
       <></>
