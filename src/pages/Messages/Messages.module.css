@@ -6,7 +6,7 @@
   display: grid;
   grid-template-columns: 40px auto;
   grid-template-rows: auto;
-  padding-top: 10px;
+  padding-top: 5px;
 }
 
 .needsContainer * {

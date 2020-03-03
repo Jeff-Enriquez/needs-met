@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Firebase from '../../services/Firebase/firebase'
+import Firebase from '../../services/Firebase/firebase';
 import Need from '../../components/Need';
-import styles from './Needs.module.css'
 
 const Needs = ({ currentUser }) => {
   const [needs, setNeeds] = useState(null)
@@ -21,7 +20,7 @@ const Needs = ({ currentUser }) => {
   }, [])
   
   return (
-    <main className={styles.main}>
+    <main style={{margin: '0 10px 0 10px'}}>
       {needs ? (
         <>
         {needs}
