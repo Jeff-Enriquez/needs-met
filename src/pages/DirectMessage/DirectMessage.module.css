@@ -55,12 +55,13 @@
   background-color: black;
   color: white;
   float: right;
+  clear: both;
 }
 
 .userMessage {
   border-radius: 1.125rem 1.125rem 1.125rem 0;
   background-color: rgb(250, 250, 250);
-  clear: right;
+  clear: both;
 }
 		
 .inputContainer {

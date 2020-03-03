@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Firebase from '../../services/Firebase/firebase';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './DirectMessage.module.css'
 const DirectMessage = (props) => {
   const id = props.computedMatch.params.id
@@ -9,9 +9,11 @@ const DirectMessage = (props) => {
   const [message, setMessage] = useState('')
   const [renderMessages, setMessages] = useState(<></>)
   const [chatId, setChatId] = useState(null)
-  const [chat, setChat] = useState(null)
+  // const [chat, setChat] = useState(null)
   const [isError, setIsError] = useState(false)
   const [user2, setUser2] = useState({})
+  // const [lastUser2Message, setLastUser2Message] = useState(null)
+  // const [lastCurrentUserMessage, setLastCurrentUserMessage] = useState(null)
 
   useEffect(() => {
     const asyncFunction = async () => {
@@ -33,10 +35,27 @@ const DirectMessage = (props) => {
       if(!chatId){
         chatId = await Firebase.createChat(currentUser.id, id)
       }
-      const chat = await Firebase.getChat(chatId)
-      setChat(chat)
+      console.log('chatid', chatId)
+      // const chat = await Firebase.getChat(chatId)
+      // setChat(chat)
       setChatId(chatId)
       setUser2(user2)
+
+      Firebase.database.collection("Chats").doc(chatId)
+      .onSnapshot((doc) => {
+        const docInfo = doc.data()
+        const userData = docInfo[id]
+        const currentUserData = docInfo[currentUser.id]
+        console.log('userData', userData)
+        console.log('currentUserMessage', currentUserData)
+        const allMessages = merge(currentUserData, userData)
+        console.log(allMessages)
+        setMessages(
+          <>
+          {allMessages}
+          </>
+        )
+      });
     }
     asyncFunction()
   }, [])
@@ -47,18 +66,18 @@ const DirectMessage = (props) => {
     setMessage('')
   }
 
-  useEffect(() => {
-    if(chat) {
-      const currentUserMessages = chat[currentUser.id]
-      const user2Messages = chat[id]
-      const allMessages = merge(currentUserMessages, user2Messages)
-      setMessages(
-        <>
-        {allMessages}
-        </>
-      )
-    }
-  }, [chat])
+  // useEffect(() => {
+  //   if(chat) {
+  //     const currentUserMessages = chat[currentUser.id]
+  //     const user2Messages = chat[id]
+  //     const allMessages = merge(currentUserMessages, user2Messages)
+  //     setMessages(
+  //       <>
+  //       {allMessages}
+  //       </>
+  //     )
+  //   }
+  // }, [chat])
 
   const merge = (arr1, arr2) => {
     let merged = [];
