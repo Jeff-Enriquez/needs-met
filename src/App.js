@@ -15,7 +15,6 @@ import DirectMessage from './pages/DirectMessage'
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(null)
-  const [isUnmet, setIsUnmet] = useState(true)
 
   const doSetCurrentUser = user => {
     setCurrentUser(user)
@@ -37,10 +36,6 @@ const App = (props) => {
       }
   })}, [])
 
-  const toggleIsUnmet = () => {
-    setIsUnmet(!isUnmet)
-  }
-
   return (
     <Switch>
       <PrivateRoute 
@@ -51,8 +46,6 @@ const App = (props) => {
       <PrivateRoute
         exact path='/needs'
         component={Needs} 
-        isUnmet={isUnmet} 
-        toggleIsUnmet={toggleIsUnmet}
         currentUser={currentUser}
       />
       <PrivateRoute

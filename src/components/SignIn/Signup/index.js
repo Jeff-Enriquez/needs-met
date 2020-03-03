@@ -45,9 +45,9 @@ const Signup = ({ doSetCurrentUser, doAuth }) => {
         <div className={styles.formHolder}>
           <input type="text" className={styles.input} placeholder="First Name" name='firstName' value={firstName} onChange={e => setFirstName(e.target.value)}  />
           <input type="text" className={styles.input} placeholder="Last Name" name='lastName' value={lastName} onChange={e => setLastName(e.target.value)}  />
-          <input type="email" className={styles.input} placeholder="Email" name='email' value={email} onChange={e => setEmail(e.target.value)}  />
-          <input type="password" className={styles.input} placeholder="Password" name='password1' value={password1} onChange={e => setPassword1(e.target.value)}  />
-          <input type="password" className={styles.input} placeholder="Confirm Password" name='password2' value={password2} onChange={e => setPassword2(e.target.value)}  />
+          <input type="email" className={styles.input} placeholder="Email" autoComplete='email' value={email} onChange={e => setEmail(e.target.value)}  />
+          <input type="password" className={styles.input} placeholder="Password" autoComplete='new-password' value={password1} onChange={e => setPassword1(e.target.value)}  />
+          <input type="password" className={styles.input} placeholder="Confirm Password" autoComplete='new-password' value={password2} onChange={e => setPassword2(e.target.value)}  />
         </div>  
       <button type='submit' disabled={isInvalid} className={styles.submitBtn}>Sign up</button>
       </form>

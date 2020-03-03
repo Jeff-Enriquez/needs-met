@@ -66,6 +66,7 @@ class Firebase {
     return chat.data()
   }
 
+
   createChat = async (id1, id2) => {
     const chatRef = await this.database.collection('Chats').add({
       [id1]: [],

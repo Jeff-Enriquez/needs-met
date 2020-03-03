@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import styles from './Messages.module.css'
 
-const Messages = (props) => {
+const Messages = ({ currentUser }) => {
   const user= {}
   const id = 0
+  
+  useEffect(() => {
+    
+  }, [])
+
   return (
     <main className={styles.main}>
       <div className={styles.needsContainer}>

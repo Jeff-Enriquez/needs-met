@@ -33,8 +33,8 @@ const Login = ({ doSetCurrentUser, doAuth }) => {
     <>
       <form onSubmit={handleForm}>
         <div className={styles.formHolder}>
-          <input type="email" className={styles.input} placeholder="Email" name='loginEmail' value={email} onChange={e => setEmail(e.target.value)} />
-          <input type="password" className={styles.input} placeholder="Password" name='loginPassword' value={password} onChange={e => setPassword(e.target.value)} />
+          <input type="email" className={styles.input} placeholder="Email" autoComplete='email' value={email} onChange={e => setEmail(e.target.value)} />
+          <input type="password" className={styles.input} placeholder="Password" autoComplete='current-password' value={password} onChange={e => setPassword(e.target.value)} />
         </div>
         <button type='submit' className={styles.submitBtn}>Log in</button>
       </form>
