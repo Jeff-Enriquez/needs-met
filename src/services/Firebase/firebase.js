@@ -61,7 +61,7 @@ class Firebase {
     })
   }
 
-  getChat = async id => {
+  getChatById = async id => {
     const chat = await this.database.collection('Chats').doc(id).get()
     return chat.data()
   }

@@ -15,6 +15,7 @@ import DirectMessage from './pages/DirectMessage'
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(null)
+  const [allUsersFromChat, setAllUsersFromChat] = useState(null)
 
   const doSetCurrentUser = user => {
     setCurrentUser(user)
@@ -34,8 +35,29 @@ const App = (props) => {
           }
         })
       }
-  })}, [])
+    })
+    return
+  }, [])
 
+  useEffect(() => {
+    const asyncFunction = async () => {
+      let users = []
+      for (let i = 0; i < currentUser.chats.length; i++) {
+        const chatId = currentUser.chats[i]
+        const chat = await Firebase.getChatById(chatId)
+        const keys = Object.keys(chat)
+        const uid = keys[0] === currentUser.id ? keys[1] : keys[0]
+        const user = await Firebase.getUserById(uid)
+        users.push({uid, user, chatId})
+      }
+      setAllUsersFromChat(users)
+    }
+    if (currentUser && currentUser.chats) {
+      asyncFunction()
+    }
+    return
+  }, [currentUser])
+  
   return (
     <Switch>
       <PrivateRoute 
@@ -52,6 +74,7 @@ const App = (props) => {
         exact path='/messages'
         component={Messages}
         currentUser={currentUser}
+        users={allUsersFromChat}
       />
       <PrivateRoute
         exact path='/messages/:id'

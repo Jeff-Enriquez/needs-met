@@ -1,25 +1,39 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import styles from './Messages.module.css'
+import { render } from 'react-dom';
 
-const Messages = ({ currentUser }) => {
-  const user= {}
-  const id = 0
-  
+const Messages = ({ currentUser, users }) => {
+  const [renderUsers, setRenderUsers] = useState(null)
   useEffect(() => {
-    
+    const render = []
+    let i = 0;
+    users.forEach((user) => {
+      
+      render.push(
+        <Link key={i} className={styles.a} to={`/messages/${user.uid}`}>
+        <div className={styles.needsContainer}>
+          <img src={user.user.photoURL ? user.user.photoURL : process.env.PUBLIC_URL + '/images/blank-profile.png'} alt='profile'/>
+          <div className={styles.infoContainer}>
+            <p className={styles.name}>{`${user.user.firstName} ${user.user.lastName}`}</p>
+          </div>
+        </div>
+        </Link>
+      )
+      i++;
+    })
+    setRenderUsers(render)
   }, [])
 
   return (
     <main className={styles.main}>
-      <div className={styles.needsContainer}>
-        <img src={user.photoURL ? user.photoURL : process.env.PUBLIC_URL + '/images/blank-profile.png'} alt='profile'/>
-        <Link className={styles.a} to={`/messages/${id}`}>
-          <div className={styles.infoContainer}>
-            <p className={styles.name}>{`${user.firstName} ${user.lastName}`}</p>
-          </div>
-        </Link>
-      </div>
+      {renderUsers ?
+        <>
+        {renderUsers}
+        </>
+        :  
+        <></>
+      }
     </main>
   )
 }

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Firebase from '../../services/Firebase/firebase';
 import { Link } from 'react-router-dom';
-import styles from './DirectMessage.module.css'
+// import ScrollableAnchor from 'react-scrollable-anchor';
+import styles from './DirectMessage.module.css';
+
 const DirectMessage = (props) => {
   const id = props.computedMatch.params.id
   const { currentUser } = props
@@ -93,7 +95,10 @@ const DirectMessage = (props) => {
       { isError ? 
         <p>Sorry, the user you are attempting to message does not exist</p>
         :
-        renderMessages
+        <>
+        {renderMessages}
+        {/* <ScrollableAnchor id={'last-message'}><span></span></ScrollableAnchor> */}
+        </>
       }
       </div>
       <form className={styles.inputContainer} onSubmit={sendMessage}>
