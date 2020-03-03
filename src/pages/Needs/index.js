@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Firebase from '../../services/Firebase/firebase';
 import Need from '../../components/Need';
+import RingLoader from "react-spinners/RingLoader";
 
 const Needs = ({ currentUser }) => {
   const [needs, setNeeds] = useState(null)
@@ -14,6 +15,8 @@ const Needs = ({ currentUser }) => {
             created={need.created} user={need.user}
           />
         )))
+      } else {
+        setNeeds(<p>There are no needs</p>)
       }
     }
     asyncFunction()
@@ -26,7 +29,11 @@ const Needs = ({ currentUser }) => {
         {needs}
         </>
       ) : (
-        <p>There are no needs</p>
+        <RingLoader
+          css={{margin: '20px auto'}}
+          size={35}
+          color='lightblue'
+        />
       )}
     </main>
   );

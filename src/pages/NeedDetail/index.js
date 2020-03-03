@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Firebase from '../../services/Firebase/firebase';
 import { Link } from 'react-router-dom';
 import styles from './NeedDetail.module.css';
+import RingLoader from "react-spinners/RingLoader";
 
 const NeedDetail = (props) => {
   const { currentUser } = props;
@@ -51,7 +52,11 @@ const NeedDetail = (props) => {
       }
       </>
       :
-      <></>
+      <RingLoader
+        css={{margin: '20px auto'}}
+        size={35}
+        color='lightblue'
+      />
     }
     </main>
   )

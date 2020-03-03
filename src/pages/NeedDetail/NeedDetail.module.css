@@ -1,6 +1,5 @@
 .main {
-  margin: 10px;
-  padding-top: 10px;
+  margin: 5px;
 }
 
 .profContainer {
@@ -37,6 +36,9 @@
 
 .infoContainer{
   margin-bottom: 10px;
+  overflow: auto;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .info {

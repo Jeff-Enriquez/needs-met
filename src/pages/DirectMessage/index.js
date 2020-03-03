@@ -69,15 +69,12 @@ const DirectMessage = (props) => {
     while (current < (arr1.length + arr2.length)) {
       let isArr1Depleted = index1 >= arr1.length;
       let isArr2Depleted = index2 >= arr2.length;
-      let i = 0;
       if (!isArr1Depleted && (isArr2Depleted || (arr1[index1].created < arr2[index2].created))) {
-        merged[current] = <p className={`${styles.message} ${styles.currentUserMessage}`} key={i}>{arr1[index1].message}</p>;
+        merged[current] = <p className={`${styles.message} ${styles.currentUserMessage}`} key={current}>{arr1[index1].message}</p>;
         index1++;
-        i++;
       } else {
-      merged[current] = <p className={`${styles.message} ${styles.userMessage}`} key={i}>{arr2[index2].message}</p>;
+      merged[current] = <p className={`${styles.message} ${styles.userMessage}`} key={current}>{arr2[index2].message}</p>;
         index2++;
-        i++;
       }
       current++;
     }
