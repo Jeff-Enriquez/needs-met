@@ -9,11 +9,8 @@ const DirectMessage = (props) => {
   const [message, setMessage] = useState('')
   const [renderMessages, setMessages] = useState(<></>)
   const [chatId, setChatId] = useState(null)
-  // const [chat, setChat] = useState(null)
   const [isError, setIsError] = useState(false)
   const [user2, setUser2] = useState({})
-  // const [lastUser2Message, setLastUser2Message] = useState(null)
-  // const [lastCurrentUserMessage, setLastCurrentUserMessage] = useState(null)
 
   useEffect(() => {
     const asyncFunction = async () => {
@@ -36,8 +33,6 @@ const DirectMessage = (props) => {
         chatId = await Firebase.createChat(currentUser.id, id)
       }
       console.log('chatid', chatId)
-      // const chat = await Firebase.getChat(chatId)
-      // setChat(chat)
       setChatId(chatId)
       setUser2(user2)
 
@@ -65,19 +60,6 @@ const DirectMessage = (props) => {
     Firebase.addMessage(currentUser.id, chatId, message)
     setMessage('')
   }
-
-  // useEffect(() => {
-  //   if(chat) {
-  //     const currentUserMessages = chat[currentUser.id]
-  //     const user2Messages = chat[id]
-  //     const allMessages = merge(currentUserMessages, user2Messages)
-  //     setMessages(
-  //       <>
-  //       {allMessages}
-  //       </>
-  //     )
-  //   }
-  // }, [chat])
 
   const merge = (arr1, arr2) => {
     let merged = [];
