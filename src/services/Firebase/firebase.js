@@ -52,21 +52,33 @@ class Firebase {
     }
   }
 
-  getUserChats = async (id) => {
-    const user = await this.database.collection('Users').doc(id).get()
-    return user.data().chats
+  addMessage = async (UID, chatID, message) => {
+    await this.database.collection('Chats').doc(chatID).update({
+      [UID]: app.firestore.FieldValue.arrayUnion({
+        message: message,
+        created: app.firestore.Timestamp.now(),
+      }),
+    })
   }
 
-  getChat = async (id) => {
+  getChat = async id => {
     const chat = await this.database.collection('Chats').doc(id).get()
     return chat.data()
   }
 
   createChat = async (id1, id2) => {
-    return await this.database.collection('Chats').add({
+    const chatRef = await this.database.collection('Chats').add({
       [id1]: [],
       [id2]: [],
     })
+    const chatId = chatRef.id
+    this.database.collection('Users').doc(id1).update({
+      chats: app.firestore.FieldValue.arrayUnion(chatId),
+    })
+    this.database.collection('Users').doc(id2).update({
+      chats: app.firestore.FieldValue.arrayUnion(chatId),
+    })
+    return chatId
   }
 
   getUserById = async id => {
@@ -84,7 +96,7 @@ class Firebase {
         created: app.firestore.Timestamp.now(),
       })
       await this.database.collection('Users').doc(id).update({
-        myNeeds: app.firestore.FieldValue.arrayUnion(doc.id),
+        needs: app.firestore.FieldValue.arrayUnion(doc.id),
       })
       return doc.id
     } catch (error) {
@@ -96,7 +108,7 @@ class Firebase {
     .then((doc) => doc.data())
 
   getUserByNeed = (id) =>  this.database.collection('Users')
-    .where('myNeeds', 'array-contains', id).limit(1).get()
+    .where('needs', 'array-contains', id).limit(1).get()
     .then((doc) => doc.docs['0'] && doc.docs['0'].data())
     
   updateUserPhoto = async (id, url) => {
