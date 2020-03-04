@@ -1,4 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
+
+.cover {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  background-color: rgba(128, 128, 128, 0.6);
+}
+
 .main {
   position: relative;
   background-color: #E1E8EE;
