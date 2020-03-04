@@ -9,9 +9,9 @@ const Messages = ({ users }) => {
     let i = 0;
     users.forEach((user) => {
       render.push(
-        <div className={styles.needsContainer}>
+        <div key={i} className={styles.needsContainer}>
           <img src={user.user.photoURL ? user.user.photoURL : process.env.PUBLIC_URL + '/images/blank-profile.png'} alt='profile'/>
-          <Link key={i} className={styles.a} to={`/messages/${user.uid}`}>
+          <Link className={styles.a} to={`/messages/${user.uid}`}>
             <div className={styles.infoContainer}>
               <p className={styles.name}>{`${user.user.firstName} ${user.user.lastName}`}</p>
             </div>

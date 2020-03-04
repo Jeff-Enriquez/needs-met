@@ -16,12 +16,17 @@ import DirectMessage from './pages/DirectMessage'
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(null)
   const [allUsersFromChat, setAllUsersFromChat] = useState(null)
-  // const [allChats, setAllChats] = useState(null)
 
   const doSetCurrentUser = user => {
-    setCurrentUser(user)
+    Firebase.database.collection("Users").doc(user.id)
+    .onSnapshot((doc) => {
+      const docInfo = doc.data()
+      docInfo['id'] = user.id
+      setCurrentUser(docInfo)
+    });
   }
 
+  //onAuthStateChanged
   useEffect(() => {
     Firebase.auth.onAuthStateChanged(user => {
       if(user){
@@ -33,28 +38,30 @@ const App = (props) => {
             user['id'] = doc.id
             doSetCurrentUser(user)
             props.history.push('/needs')
+          } else {
+            setCurrentUser(undefined)
           }
         })
+      } else {
+        setCurrentUser(undefined)
       }
     })
     return
   }, [])
 
+  //setAllUsersFromChat
   useEffect(() => {
     const asyncFunction = async () => {
       let users = []
-      // let allChats = {}
       for (let i = 0; i < currentUser.chats.length; i++) {
         const chatId = currentUser.chats[i]
         const chat = await Firebase.getChatById(chatId)
-        // allChats[chatId] = chat
         const keys = Object.keys(chat)
         const uid = keys[0] === currentUser.id ? keys[1] : keys[0]
         const user = await Firebase.getUserById(uid)
         users.push({uid, user, chatId})
       }
       setAllUsersFromChat(users)
-      // setAllChats(allChats)
     }
     if (currentUser && currentUser.chats) {
       asyncFunction()

@@ -17,6 +17,7 @@ const Login = ({ doSetCurrentUser }) => {
         if(doc.exists) {
           const currentUser = doc.data()
           currentUser['id'] = doc.id
+          console.log(doc.id)
           doSetCurrentUser(currentUser)
         }
       })

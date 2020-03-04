@@ -52,6 +52,25 @@ class Firebase {
     }
   }
 
+  getMyNeeds = async id => {
+    const needs = []
+    try {
+      const querySnapshot = await this.database.collection('Needs').where('userId', '==', id).get()
+      const { docs } = querySnapshot
+      for(let i = 0; i < docs.length; i++){
+        const { summary, created } = docs[i].data()
+        needs.push({
+          id: docs[i].id,
+          summary: summary, 
+          created: created.toDate().toString().slice(0,21),
+        })
+      }
+      return needs
+    } catch(error) {
+
+    }
+  }
+
   addMessage = async (UID, chatID, message) => {
     await this.database.collection('Chats').doc(chatID).update({
       [UID]: app.firestore.FieldValue.arrayUnion({

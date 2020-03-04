@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './Need.module.css'
 
 const Need = ({ id, summary, created, user }) => {
+  // get user information here in use effect
   return (
     <div className={styles.needsContainer}>
       {user.photoURL ?
