@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Firebase from '../../../services/Firebase/firebase';
 import styles from '../Login.module.css';
 
-const Signup = ({ doSetCurrentUser, doAuth }) => {
+const Signup = ({ doSetCurrentUser }) => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
@@ -33,7 +33,6 @@ const Signup = ({ doSetCurrentUser, doAuth }) => {
       const currentUser = doc.data()
       currentUser['id'] = doc.id
       await doSetCurrentUser(currentUser)
-      doAuth();
     } catch (err) {
       setError(err)
     }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Firebase from '../../../services/Firebase/firebase';
 import styles from '../Login.module.css';
 
-const Login = ({ doSetCurrentUser, doAuth }) => {
+const Login = ({ doSetCurrentUser }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
@@ -23,7 +23,6 @@ const Login = ({ doSetCurrentUser, doAuth }) => {
       .catch(function(error) {
           setError('Sorry, there is an error with your account')
       });
-      doAuth();
     } catch (err) {
       setError(err)
     }
