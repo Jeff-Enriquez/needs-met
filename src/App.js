@@ -9,6 +9,7 @@ import NeedDetail from './pages/NeedDetail';
 import Messages from './pages/Messages';
 import AddANeed from './pages/AddANeed';
 import MyNeeds from './pages/MyNeeds';
+import EditNeed from './pages/EditNeed';
 import More from './pages/More';
 import My404 from './pages/My404';
 import DirectMessage from './pages/DirectMessage'
@@ -71,6 +72,11 @@ const App = (props) => {
   
   return (
     <Switch>
+      <PrivateRoute 
+        exact path='/needs/:id/edit'
+        component={EditNeed}
+        currentUser={currentUser}
+      />
       <PrivateRoute 
         exact path='/needs/:id'
         component={NeedDetail}

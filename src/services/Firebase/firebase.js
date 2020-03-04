@@ -124,6 +124,13 @@ class Firebase {
     }
   }
 
+  updateNeed = async (id, summary, details) => {
+    await this.database.collection('Needs').doc(id).update({
+      summary: summary,
+      details: details,
+    })
+  }
+
   deleteNeed = id => {
     this.database.collection('Needs').doc(id).delete()
   }

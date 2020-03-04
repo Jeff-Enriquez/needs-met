@@ -43,7 +43,7 @@ const NeedDetail = (props) => {
     <>
     {isDeleted && <Redirect to='/my-needs' />}
     <main className={styles.main}>
-    {firstName ? 
+    {created ? 
       <>
       <div className={styles.profContainer}>
         <img className={styles.img} src={photoURL ? photoURL : process.env.PUBLIC_URL + '/images/blank-profile.png'} alt='profile'/>
@@ -62,7 +62,7 @@ const NeedDetail = (props) => {
         </Link>
         :
         <>
-          <Link to={`/messages/${userId}/edit`} className={styles.a}>
+          <Link to={`/needs/${needId}/edit`} className={styles.a}>
             <button className={styles.button}>Edit</button>
           </Link>
           <button onClick={() => {setIsDeleteModal(true)}} type='submit' className={`${styles.button} ${styles.red}`}>Delete</button>
