@@ -46,21 +46,26 @@
   margin: 0;
 }
 
+.a {
+  text-decoration: none;
+}
+
 .button {
   padding: 6px 13px;
   cursor: pointer;
   overflow: visible;
+  outline: none;
   font: bold 13px arial, helvetica, sans-serif;
-  text-decoration: none;
   color: #fff;
+  border: none;
   background-color: #269CE9;
-  border-color: #269CE9;
   text-shadow: 0 1px 0 rgba(0,0,0,.2); 
   background-image: linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
   transition: background-color .2s ease-out;
   border-radius: 3px;
   font-size: 15px;
-  margin-top: 10px;
+  margin-top: 20px;
+  margin-left: 10px;
 }
 
 .button:active{
@@ -69,4 +74,26 @@
 
 .button.blue:hover{
   background-color: #70B9E8;
+}
+
+.deleteModal {
+  text-align: center;
+  position: fixed;
+  top: 15%;
+  left: 15%;
+  width: 70vw;
+  height: 18vh;
+  background-color: rgba(0, 0, 100, 0.8);
+}
+
+.deleteModal p {
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 10px;
+  margin-bottom: 0;
+}
+
+.red {
+  background-color: rgb(255, 64, 64);
 }

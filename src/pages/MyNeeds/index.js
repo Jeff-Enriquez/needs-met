@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Firebase from '../../services/Firebase/firebase';
 import Need from '../../components/Need';
 import RingLoader from "react-spinners/RingLoader";
-import styles from './MyNeeds.module.css';
 
-function MyNeeds({ currentUser }) {
+const MyNeeds =({ currentUser }) => {
   const [myNeeds, setMyNeeds] = useState(null)
+
   useEffect(() => {
     const asyncFunction = async () => {
       const needs = await Firebase.getMyNeeds(currentUser.id)
@@ -21,11 +21,12 @@ function MyNeeds({ currentUser }) {
     }
     asyncFunction()
   }, [])
-  
+
   return (
     <main style={{margin: '0 10px 0 10px'}}>
       {myNeeds ? (
         <>
+        <h1 style={{margin: '0 auto', color: '#269CE9', width: 'fit-content'}}>My Needs</h1>
         {myNeeds}
         </>
       ) : (

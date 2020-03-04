@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Firebase from '../../services/Firebase/firebase';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import styles from './NeedDetail.module.css';
 import RingLoader from "react-spinners/RingLoader";
 
 const NeedDetail = (props) => {
   const { currentUser } = props;
+  const needId = props.computedMatch.params.id
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [photoURL, setPhotoURL] = useState('')
@@ -13,17 +14,16 @@ const NeedDetail = (props) => {
   const [details, setDetails] = useState('')
   const [created, setCreated] = useState('')
   const [userId, setUserId] = useState('')
-  const [isBtn, setIsBtn] = useState(false)
+  const [isDeleteModal, setIsDeleteModal] = useState (false)
+  const [isDeleted, setIsDeleted] = useState(false)
 
   useEffect(() => {
     const asyncFunction = async () => {
-      const needId = await props.computedMatch.params.id
       const { firstName, lastName, photoURL } = await Firebase.getUserByNeed(needId)
       setFirstName(firstName)
       setLastName(lastName)
       setPhotoURL(photoURL)
       const { summary, details, created, userId } = await Firebase.getANeed(needId)
-      setIsBtn(userId !== currentUser.id ? true : false)
       setUserId(userId)
       setSummary(summary)
       setDetails(details)
@@ -32,7 +32,16 @@ const NeedDetail = (props) => {
     asyncFunction()
   }, [])
 
+  const confirmDelete = () => {
+    if(currentUser.id === userId) {
+      Firebase.deleteNeed(needId)
+      setIsDeleted(true)
+    }
+  }
+
   return (
+    <>
+    {isDeleted && <Redirect to='/my-needs' />}
     <main className={styles.main}>
     {firstName ? 
       <>
@@ -47,8 +56,24 @@ const NeedDetail = (props) => {
         <h2 className={styles.h2}>Need Details:</h2>
         <p className={styles.info}>{details}</p>
       </div>
-      {isBtn &&
-      <Link to={`/messages/${userId}`} className={styles.button}>Contact</Link>
+      {userId !== currentUser.id ?
+        <Link to={`/messages/${userId}`} className={styles.a}>
+          <button className={styles.button}>Contact</button>
+        </Link>
+        :
+        <>
+          <Link to={`/messages/${userId}/edit`} className={styles.a}>
+            <button className={styles.button}>Edit</button>
+          </Link>
+          <button onClick={() => {setIsDeleteModal(true)}} type='submit' className={`${styles.button} ${styles.red}`}>Delete</button>
+        </>
+      }
+      {isDeleteModal &&
+        <div className={styles.deleteModal}>
+          <p>Are you sure you want to delete this need?</p>
+          <button onClick={() => {setIsDeleteModal(false)}}className={styles.button} >No</button>
+          <button onClick={() => confirmDelete()}className={`${styles.button} ${styles.red}`} >Yes</button>
+        </div>
       }
       </>
       :
@@ -59,6 +84,7 @@ const NeedDetail = (props) => {
       />
     }
     </main>
+    </>
   )
 }
 

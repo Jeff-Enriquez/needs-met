@@ -124,6 +124,10 @@ class Firebase {
     }
   }
 
+  deleteNeed = id => {
+    this.database.collection('Needs').doc(id).delete()
+  }
+
   getANeed = (id) => this.database.collection('Needs').doc(id).get()
     .then((doc) => doc.data())
 

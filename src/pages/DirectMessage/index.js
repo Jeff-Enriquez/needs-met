@@ -84,9 +84,13 @@ const DirectMessage = (props) => {
     <>
       <div className={styles.contactBar}>
         <Link to='/messages' className={styles.arrow}>&#8592;</Link>
-        <img className={styles.pic} src={user2.photoURL ? user2.photoURL : process.env.PUBLIC_URL + '/images/blank-profile.png'} alt='profile'/>
-        <p className={styles.name}>{ user2 && `${user2.firstName} ${user2.lastName}`}</p>
-      </div>
+        {user2.firstName && 
+          <>
+          <img className={styles.pic} src={user2.photoURL ? user2.photoURL : process.env.PUBLIC_URL + '/images/blank-profile.png'} alt='profile'/>
+          <p className={styles.name}>{`${user2.firstName} ${user2.lastName}`}</p>
+          </>
+        }
+        </div>
       <div className={styles.chatBox}>
       { isError ? 
         <p>Sorry, the user you are attempting to message does not exist</p>
