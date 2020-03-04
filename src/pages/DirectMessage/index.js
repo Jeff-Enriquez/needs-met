@@ -34,7 +34,6 @@ const DirectMessage = (props) => {
       if(!chatId){
         chatId = await Firebase.createChat(currentUser.id, id)
       }
-      console.log('chatid', chatId)
       setChatId(chatId)
       setUser2(user2)
 
@@ -43,10 +42,7 @@ const DirectMessage = (props) => {
         const docInfo = doc.data()
         const userData = docInfo[id]
         const currentUserData = docInfo[currentUser.id]
-        console.log('userData', userData)
-        console.log('currentUserMessage', currentUserData)
         const allMessages = merge(currentUserData, userData)
-        console.log(allMessages)
         setMessages(
           <>
           {allMessages}

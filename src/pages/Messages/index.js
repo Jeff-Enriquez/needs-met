@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import styles from './Messages.module.css'
-import { render } from 'react-dom';
 
-const Messages = ({ currentUser, users }) => {
+const Messages = ({ users }) => {
   const [renderUsers, setRenderUsers] = useState(null)
   useEffect(() => {
     const render = []
     let i = 0;
     users.forEach((user) => {
-      
       render.push(
-        <Link key={i} className={styles.a} to={`/messages/${user.uid}`}>
         <div className={styles.needsContainer}>
           <img src={user.user.photoURL ? user.user.photoURL : process.env.PUBLIC_URL + '/images/blank-profile.png'} alt='profile'/>
-          <div className={styles.infoContainer}>
-            <p className={styles.name}>{`${user.user.firstName} ${user.user.lastName}`}</p>
-          </div>
+          <Link key={i} className={styles.a} to={`/messages/${user.uid}`}>
+            <div className={styles.infoContainer}>
+              <p className={styles.name}>{`${user.user.firstName} ${user.user.lastName}`}</p>
+            </div>
+          </Link>
         </div>
-        </Link>
       )
       i++;
     })

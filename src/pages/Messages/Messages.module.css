@@ -6,7 +6,7 @@
   display: grid;
   grid-template-columns: 40px auto;
   grid-template-rows: auto;
-  padding-top: 5px;
+  margin-top: 5px;
 }
 
 .needsContainer * {
@@ -20,19 +20,17 @@
   border-radius: 50%;
 }
 
-.name{
-  font-weight: bold;
-}
-
 .a {
   text-decoration: none;
   color: inherit;
   overflow: auto;
+  margin-left: 10px;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
-.p {
+.name {
+  font-weight: bold;
   font-size: 12px;
   display: inline-block;
   margin-right: 5px;
