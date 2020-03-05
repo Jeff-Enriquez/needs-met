@@ -28,21 +28,25 @@ const Needs = ({ currentUser }) => {
   }, [])
 
   const nextNeeds = async () => {
-    const [ needs, lastDoc ] = await Firebase.getNeedsAfter(needHistory[needHistory.length - 1], limit)
-    if (lastDoc) {
-      setNeedHistory(needHistory => {return [...needHistory, lastDoc]})
-      if(needs) {
-        setNeeds(needs.map((need, i) => (
-          <Need key={i} id={need.id} summary={need.summary} 
-            created={need.created} user={need.user}
-          />
-        )))
+    if (needHistory) {
+      setNeeds(null)
+      const [ needs, lastDoc ] = await Firebase.getNeedsAfter(needHistory[needHistory.length - 1], limit)
+      if (lastDoc) {
+        setNeedHistory(needHistory => {return [...needHistory, lastDoc]})
+        if(needs) {
+          setNeeds(needs.map((need, i) => (
+            <Need key={i} id={need.id} summary={need.summary} 
+              created={need.created} user={need.user}
+            />
+          )))
+        }
       }
     }
   }
 
   const prevNeeds = async () => {
-    if (needHistory.length - 3 >= 0) {
+    if (needHistory && needHistory.length - 3 >= 0) {
+      setNeeds(null)
       let needs, lastDoc
       if (needHistory.length - 3 === 0) {
         [ needs, lastDoc ] = await Firebase.getNeedsAt(needHistory[needHistory.length - 3], limit)

@@ -28,6 +28,7 @@ const Messages = ({ users }) => {
 
   return (
     <main className={styles.main}>
+      <h1 className={styles.h1}>Your Messages</h1>
       {renderUsers ?
         <>
         {renderUsers}

@@ -9,8 +9,8 @@ function Footer({ pathname }) {
     <nav className={styles.nav}>
       <NavLink className={styles.a} exact to='/'>
         <div>
-          <img src={pathname.startsWith('/needs') ? process.env.PUBLIC_URL + '/images/help.png' : process.env.PUBLIC_URL + '/images/help-gray.png'} alt='help'/>
-          <p className={styles.p} style={pathname.startsWith('/needs') ?  {color: '#FFFFFF'} : {color: '#B3B3B3'}}>Help Others</p>
+          <img src={pathname === '/needs' ? process.env.PUBLIC_URL + '/images/help.png' : process.env.PUBLIC_URL + '/images/help-gray.png'} alt='help'/>
+          <p className={styles.p} style={pathname === '/needs' ?  {color: '#FFFFFF'} : {color: '#B3B3B3'}}>Help Others</p>
         </div>
       </NavLink>
       <NavLink className={styles.a} exact to='/messages'>
