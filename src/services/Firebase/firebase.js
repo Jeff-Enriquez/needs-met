@@ -73,7 +73,7 @@ class Firebase {
           user: user,
         })
       }
-      return [ needs, docs[limit-1] ]
+      return [ needs, docs[docs.length - 1] ]
     } catch(error) {
 
     }
@@ -95,7 +95,7 @@ class Firebase {
           user: user,
         })
       }
-      return [ needs, docs[limit-1] ]
+      return [ needs, docs[docs.length - 1] ]
     } catch(error) {
 
     }
