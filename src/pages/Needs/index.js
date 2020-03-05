@@ -6,12 +6,12 @@ import RingLoader from "react-spinners/RingLoader";
 const Needs = ({ currentUser }) => {
   const [needs, setNeeds] = useState(null)
   const [startNeed, setStartNeed] = useState(null)
-  const [limit] = useState(10)
+  const [limit] = useState(2)
 
   useEffect(() => { 
     const asyncFunction = async () => {
       const firstNeed = await Firebase.getFirstNeed()
-      const [ needs, lastDoc ] = await Firebase.getNeedsAt(firstNeed, 10)
+      const [ needs, lastDoc ] = await Firebase.getNeedsAt(firstNeed, limit)
       setStartNeed(lastDoc)
       if(needs) {
         setNeeds(needs.map((need, i) => (
@@ -27,7 +27,7 @@ const Needs = ({ currentUser }) => {
   }, [])
 
   const nextNeeds = async () => {
-    const [ needs, lastDoc ] = await Firebase.getNeedsAfter(startNeed, 10)
+    const [ needs, lastDoc ] = await Firebase.getNeedsAfter(startNeed, limit)
     setStartNeed(lastDoc)
     if(needs) {
       setNeeds(needs.map((need, i) => (
