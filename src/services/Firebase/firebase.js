@@ -83,7 +83,7 @@ class Firebase {
   getMyNeeds = async id => {
     const needs = []
     try {
-      const querySnapshot = await this.database.collection('Needs').where('userId', '==', id).get()
+      const querySnapshot = await this.database.collection('Needs').where('userId', '==', id).orderBy("created", 'asc').get()
       const { docs } = querySnapshot
       for(let i = 0; i < docs.length; i++){
         const { summary, created } = docs[i].data()
@@ -95,7 +95,7 @@ class Firebase {
       }
       return needs
     } catch(error) {
-
+      console.log(error)
     }
   }
 
