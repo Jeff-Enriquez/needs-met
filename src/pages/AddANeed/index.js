@@ -8,12 +8,14 @@ const AddANeed = ({ currentUser }) => {
   const [details, setDetails] = useState('')
   const [error, setError] = useState('')
   const [redirect, setRedirect] = useState(null)
+  const [isDisabled, setIsDisabled] = useState(false)
 
   const sumLen = 100;
   const detLen = 750;
 
   const handleForm = async e => {
     e.preventDefault()
+    setIsDisabled(true)
     if(summary.length > sumLen) {
       setError(`The brief description must be less than ${sumLen} characters`)
     } else if (details.length > detLen) {
@@ -27,6 +29,7 @@ const AddANeed = ({ currentUser }) => {
         const id = await Firebase.addANeed(currentUser.id, summary, details)
         setRedirect(`/needs/${id}`)
       } catch(error) {
+        setError('Sorry there was an error adding your need. Try again later.')
       }
     }
   }
@@ -55,7 +58,7 @@ const AddANeed = ({ currentUser }) => {
               maxLength={detLen}
             />
             {error && <span style={{ color: 'red' }}>{error}</span>}
-            <button type='submit' className={`${styles.submitBtn} ${styles.blue}`}>Add Need</button>
+            <button type='submit' disabled={isDisabled} className={`${styles.submitBtn} ${styles.blue}`}>Add Need</button>
           </form>
         </div>
       }
