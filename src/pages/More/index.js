@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Firebase from '../../services/Firebase/firebase';
+import styles from './More.module.css';
 
 function More({ currentUser, signOut }) {
   const [photoURL, setPhotoURL] = useState('')
@@ -19,16 +20,17 @@ function More({ currentUser, signOut }) {
   }
 
   return (
-    <>
-      <h1>Add a Photo</h1>
-      <form onSubmit={e => addPhoto(e)}>
-        <input type="url" placeholder="Enter Your Photo URL" value={photoURL} onChange={e => setPhotoURL(e.target.value)}  />
-        <button type='submit'>Submit</button>
+    <main className={styles.main}>
+      <h1 className={styles.h1}>Update Your Profile Picture</h1>
+      <form className={styles.form} onSubmit={e => addPhoto(e)}>
+        <input className={styles.input} type="url" placeholder="Enter Your Photo URL" value={photoURL} onChange={e => setPhotoURL(e.target.value)}  />
+        <button className={styles.button} type='submit'>Submit</button>
       </form>
       {response && <p style={{ color: '#65bb48' }}>{response}</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <button onClick={signOut}>Log out</button>
-    </> 
+      <h1 className={styles.h1}>LogOut</h1>
+      <button className={styles.button} onClick={signOut}>Log out</button>
+    </main> 
   );
 }
 

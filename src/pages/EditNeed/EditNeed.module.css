@@ -71,7 +71,3 @@
 .button:active{
   background-color: #70B9E8;
 }
-
-.button.blue:hover{
-  background-color: #70B9E8;
-}
