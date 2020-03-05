@@ -27,6 +27,12 @@ const App = (props) => {
     });
   }
 
+  const signOut = () => {
+    Firebase.doSignOut()
+    setCurrentUser(null)
+    setAllUsersFromChat(null)
+  }
+
   //onAuthStateChanged
   useEffect(() => {
     Firebase.auth.onAuthStateChanged(user => {
@@ -113,6 +119,7 @@ const App = (props) => {
         exact path='/more'
         component={More}
         currentUser={currentUser}
+        signOut = {signOut}
       />
       <Route exact path='/' render={() =>
         <Redirect to='/needs' />

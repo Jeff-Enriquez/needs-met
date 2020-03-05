@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Firebase from '../../services/Firebase/firebase';
 
-function More({ currentUser }) {
+function More({ currentUser, signOut }) {
   const [photoURL, setPhotoURL] = useState('')
   const [response, setResponse] = useState('')
   const [error, setError] = useState ('')
@@ -27,6 +27,7 @@ function More({ currentUser }) {
       </form>
       {response && <p style={{ color: '#65bb48' }}>{response}</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
+      <button onClick={signOut}>Log out</button>
     </> 
   );
 }

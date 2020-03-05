@@ -27,7 +27,6 @@ const AddANeed = ({ currentUser }) => {
         const id = await Firebase.addANeed(currentUser.id, summary, details)
         setRedirect(`/needs/${id}`)
       } catch(error) {
-        console.log(error)
       }
     }
   }
