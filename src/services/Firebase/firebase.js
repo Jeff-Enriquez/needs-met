@@ -30,11 +30,38 @@ class Firebase {
 
   doSignOut = () => this.auth.signOut();
 
-  getNeeds = async () => {
+  // getNeeds = async () => {
+  //   const needs = []
+  //   try {
+  //     const querySnapshot = await this.database.collection('Needs').where('met', '==', false)
+  //     .orderBy("created", 'desc').get()
+  //     const { docs } = querySnapshot
+  //     for(let i = 0; i < docs.length; i++){
+  //       const { summary, created, userId } = docs[i].data()
+  //       const user = await this.getUserById(userId)
+  //       needs.push({
+  //         id: docs[i].id,
+  //         summary: summary, 
+  //         created: created.toDate().toString().slice(0,21),
+  //         user: user,
+  //       })
+  //     }
+  //     return needs
+  //   } catch(error) {
+
+  //   }
+  // }
+  getFirstNeed = async () => {
+    const querySnapshot = await this.database.collection('Needs').where('met', '==', false)
+    .orderBy("created", 'desc').limit(1).get()
+    return querySnapshot.docs[0]
+  }
+
+  getNeedsAfter = async (start, limit) => {
     const needs = []
     try {
       const querySnapshot = await this.database.collection('Needs').where('met', '==', false)
-      .orderBy("created", 'desc').get()
+      .orderBy("created", 'desc').startAfter(start).limit(limit).get()
       const { docs } = querySnapshot
       for(let i = 0; i < docs.length; i++){
         const { summary, created, userId } = docs[i].data()
@@ -46,7 +73,29 @@ class Firebase {
           user: user,
         })
       }
-      return needs
+      return [ needs, docs[limit-1] ]
+    } catch(error) {
+
+    }
+  }
+
+  getNeedsAt = async (start, limit) => {
+    const needs = []
+    try {
+      const querySnapshot = await this.database.collection('Needs').where('met', '==', false)
+      .orderBy("created", 'desc').startAt(start).limit(limit).get()
+      const { docs } = querySnapshot
+      for(let i = 0; i < docs.length; i++){
+        const { summary, created, userId } = docs[i].data()
+        const user = await this.getUserById(userId)
+        needs.push({
+          id: docs[i].id,
+          summary: summary, 
+          created: created.toDate().toString().slice(0,21),
+          user: user,
+        })
+      }
+      return [ needs, docs[limit-1] ]
     } catch(error) {
 
     }
