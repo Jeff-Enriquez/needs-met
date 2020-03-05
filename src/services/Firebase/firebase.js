@@ -159,8 +159,11 @@ class Firebase {
     })
   }
 
-  deleteNeed = id => {
-    this.database.collection('Needs').doc(id).delete()
+  deleteNeed = (needId, userId) => {
+    this.database.collection('Needs').doc(needId).delete()
+    this.database.collection('Users').doc(userId).update({
+      needs: app.firestore.FieldValue.arrayRemove(needId)
+    })
   }
 
   getANeed = (id) => this.database.collection('Needs').doc(id).get()

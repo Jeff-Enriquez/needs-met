@@ -34,7 +34,7 @@ const NeedDetail = (props) => {
 
   const confirmDelete = () => {
     if(currentUser.id === userId) {
-      Firebase.deleteNeed(needId)
+      Firebase.deleteNeed(needId, userId)
       setIsDeleted(true)
     }
   }
