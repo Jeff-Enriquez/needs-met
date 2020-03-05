@@ -124,3 +124,8 @@
 	cursor: pointer;
 	outline: none;
 }
+
+.endRef {
+  float: right;
+  clear: both;  
+}

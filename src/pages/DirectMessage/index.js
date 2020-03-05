@@ -1,62 +1,67 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Firebase from '../../services/Firebase/firebase';
 import { Link } from 'react-router-dom';
-// import ScrollableAnchor from 'react-scrollable-anchor';
 import styles from './DirectMessage.module.css';
 
 const DirectMessage = (props) => {
   const id = props.computedMatch.params.id
   const { currentUser } = props
-
   const [message, setMessage] = useState('')
   const [renderMessages, setMessages] = useState(<></>)
   const [chatId, setChatId] = useState(null)
   const [isError, setIsError] = useState(false)
   const [user2, setUser2] = useState({})
+  const messagesEndRef = useRef(null)
 
   useEffect(() => {
     const asyncFunction = async () => {
       let user2 = {}
       try {
         user2 = await Firebase.getUserById(id)
-        
+        let chatId = null;
+        user2.chats.forEach((u2Chat) => {
+          currentUser.chats.forEach((u1Chat) => {
+            if(u1Chat === u2Chat){
+              chatId = u1Chat;
+            }
+          })
+        })
+        if(!chatId){
+          chatId = await Firebase.createChat(currentUser.id, id)
+        }
+        setChatId(chatId)
+        setUser2(user2)
+
+        Firebase.database.collection("Chats").doc(chatId)
+        .onSnapshot((doc) => {
+          const docInfo = doc.data()
+          const userData = docInfo[id]
+          const currentUserData = docInfo[currentUser.id]
+          const allMessages = merge(currentUserData, userData)
+          setMessages(
+            <>
+            {allMessages}
+            </>
+          )
+        });
       } catch(error) {
         setIsError(true)
       }
-      let chatId = null;
-      user2.chats.forEach((u2Chat) => {
-        currentUser.chats.forEach((u1Chat) => {
-          if(u1Chat === u2Chat){
-            chatId = u1Chat;
-          }
-        })
-      })
-      if(!chatId){
-        chatId = await Firebase.createChat(currentUser.id, id)
-      }
-      setChatId(chatId)
-      setUser2(user2)
-
-      Firebase.database.collection("Chats").doc(chatId)
-      .onSnapshot((doc) => {
-        const docInfo = doc.data()
-        const userData = docInfo[id]
-        const currentUserData = docInfo[currentUser.id]
-        const allMessages = merge(currentUserData, userData)
-        setMessages(
-          <>
-          {allMessages}
-          </>
-        )
-      });
     }
     asyncFunction()
+    return
   }, [])
+
+  useEffect(scrollToBottom, [renderMessages])
 
   const sendMessage = async e => {
     e.preventDefault()
     Firebase.addMessage(currentUser.id, chatId, message)
     setMessage('')
+  }
+
+  function scrollToBottom () {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
   }
 
   const merge = (arr1, arr2) => {
@@ -92,14 +97,14 @@ const DirectMessage = (props) => {
         }
         </div>
       <div className={styles.chatBox}>
-      { isError ? 
-        <p>Sorry, the user you are attempting to message does not exist</p>
-        :
-        <>
-        {renderMessages}
-        {/* <ScrollableAnchor id={'last-message'}><span></span></ScrollableAnchor> */}
-        </>
-      }
+        { isError ? 
+          <p>Sorry, the user you are attempting to message does not exist</p>
+          :
+          <>
+          {renderMessages}
+          </>
+        }
+        <div className={styles.endRef} ref={messagesEndRef} />
       </div>
       <form className={styles.inputContainer} onSubmit={sendMessage}>
         <input className={styles.input} type='text' placeholder='Type your message here!' value={message} onChange={e => setMessage(e.target.value)}/>
