@@ -30,7 +30,6 @@ const App = (props) => {
 
   const signOut = () => {
     Firebase.doSignOut()
-    unsubscribe()
     setUnsubscribe(null)
     setCurrentUser(null)
     setAllUsersFromChat(null)
