@@ -1,18 +1,34 @@
-# Needs Met
-This is a site based on the principle of Acts 2:45 "And they were selling their possessions and belongings and distributing the proceeds to all, as any had need."
+<h3>Introduction</h3>
+<p>Users can post any need that they may have. They can view needs that other users have posted and contact them to help them with their need. This is a mobile first design. To view the app click <a href='https://needs-met.firebaseapp.com'>here.</a></p>
 
-Users can select which church they are from and post any needs they have. Other users from that church can view those needs and reach out to help.
+<h3>Technologies Used</h3>
+<ul>
+  <li>React</li>
+  <li>JavaScript</li>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>Firebase</li>
+  <li>Firestore</li>
+</ul>
 
-### Technology Used
-* React
-* JavaScript
-* HTML
-* CSS
+<h3>Getting Started</h3>
+To access the app you must sign up or log in. To message a user, you must click on their need and then click contact. After doing so, that user will appear in your messages tab.
 
-### Screenshots
+<h3>Screen Shots</h3>
+<img src='https://imgur.com/NkPudrR.png' />
+<img src='https://imgur.com/n2ZPSud.png' />
+<img src='https://imgur.com/ZL0LlwL.png' />
+<img src='https://imgur.com/mpfFMa6.png' />
+<img src='https://imgur.com/R3NbLZx.png' />
+<img src='https://imgur.com/knwFL1q.png' />
+<img src='https://imgur.com/LWTS5mo.png' />
 
-
-### Getting Started
-
-
-### Next Steps
+<h3>Future Enhancements</h3>
+<ul>
+  <li>Create design for desktop experience</li>
+  <li>Add loading icon when tabbing to next needs </li>
+  <li>Have a red notification on the messages icon indicating the number of unread messages</li>
+  <li>Add categories for needs</li>
+  <li>Implement search for needs by category and proximity to current location</li>
+  <li>Use Google OAuth</li>
+</uL>
