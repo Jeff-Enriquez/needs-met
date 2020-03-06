@@ -19,10 +19,15 @@ function More({ currentUser, signOut }) {
     setTimeout(() => {setResponse('')}, 3000)
   }
 
+  
+
   return (
     <main className={styles.main}>
+      <img className={styles.img} src={currentUser.photoURL ? currentUser.photoURL : process.env.PUBLIC_URL + '/images/blank-profile.png'} alt='profile'/>
       <h1 className={styles.h1}>Update Your Profile Picture</h1>
-      <form className={styles.form} onSubmit={e => addPhoto(e)}>
+      <form className={styles.form} 
+        onSubmit={e => {addPhoto(e); setPhotoURL('')}}
+      >
         <input className={styles.input} type="url" placeholder="Enter Your Photo URL" value={photoURL} onChange={e => setPhotoURL(e.target.value)}  />
         <button className={styles.button} type='submit'>Submit</button>
       </form>
