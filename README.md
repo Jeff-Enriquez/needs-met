@@ -15,13 +15,20 @@
 To access the app you must sign up or log in. To message a user, you must click on their need and then click contact. After doing so, that user will appear in your messages tab.
 
 <h3>Screen Shots</h3>
-<img src='https://imgur.com/NkPudrR.png' />
-<img src='https://imgur.com/n2ZPSud.png' />
-<img src='https://imgur.com/ZL0LlwL.png' />
-<img src='https://imgur.com/mpfFMa6.png' />
-<img src='https://imgur.com/R3NbLZx.png' />
-<img src='https://imgur.com/knwFL1q.png' />
-<img src='https://imgur.com/LWTS5mo.png' />
+<img style='max-width: 650px' src='https://imgur.com/NkPudrR.png' />
+<img style='max-width: 650px'
+src='https://imgur.com/n2ZPSud.png' />
+<img style='max-width: 650px'
+src='https://imgur.com/ZL0LlwL.png' />
+<img style='max-width: 650px'
+src='https://imgur.com/mpfFMa6.png' />
+<img 
+style='max-width: 650px'
+src='https://imgur.com/R3NbLZx.png' />
+<img style='max-width: 650px'
+src='https://imgur.com/knwFL1q.png' />
+<img style='max-width: 650px'
+src='https://imgur.com/LWTS5mo.png' />
 
 <h3>Future Enhancements</h3>
 <ul>
