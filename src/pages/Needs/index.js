@@ -12,16 +12,20 @@ const Needs = ({ currentUser }) => {
   useEffect(() => { 
     const asyncFunction = async () => {
       const firstNeed = await Firebase.getFirstNeed()
-      const [ needs, lastDoc ] = await Firebase.getNeedsAt(firstNeed, limit)
-      setNeedHistory([ firstNeed, lastDoc])
-      if(needs) {
-        setNeeds(needs.map((need, i) => (
-          <Need key={i} id={need.id} summary={need.summary} 
-            created={need.created} user={need.user}
-          />
-        )))
-      } else {
+      if (firstNeed === undefined) {
         setNeeds(<p>There are no needs</p>)
+      } else {
+        const [ needs, lastDoc ] = await Firebase.getNeedsAt(firstNeed, limit)
+        setNeedHistory([ firstNeed, lastDoc])
+        if(needs) {
+          setNeeds(needs.map((need, i) => (
+            <Need key={i} id={need.id} summary={need.summary} 
+              created={need.created} user={need.user}
+            />
+          )))
+        } else {
+          setNeeds(<p>There are no needs</p>)
+        }
       }
     }
     asyncFunction()
@@ -29,7 +33,6 @@ const Needs = ({ currentUser }) => {
 
   const nextNeeds = async () => {
     if (needHistory) {
-      setNeeds(null)
       const [ needs, lastDoc ] = await Firebase.getNeedsAfter(needHistory[needHistory.length - 1], limit)
       if (lastDoc) {
         setNeedHistory(needHistory => {return [...needHistory, lastDoc]})

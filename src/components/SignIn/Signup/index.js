@@ -23,8 +23,8 @@ const Signup = ({ doSetCurrentUser }) => {
     try {
       const { user } = await Firebase.doCreateUserWithEmailAndPassword(email, password1)
       await Firebase.database.collection('Users').doc(user.uid).set({
-        firstName: firstName,
-        lastName: lastName,
+        firstName: (firstName.slice(0,1).toUpperCase() + firstName.slice(1,firstName.length)),
+        lastName: (lastName.slice(0,1).toUpperCase() + lastName.slice(1,lastName.length)),
         email: email,
         chats: [],
         needs: [],

@@ -17,6 +17,7 @@ import DirectMessage from './pages/DirectMessage'
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(null)
   const [allUsersFromChat, setAllUsersFromChat] = useState(null)
+  const [unsubscribe, setUnsubscribe] = useState(null)
 
   const doSetCurrentUser = user => {
     Firebase.database.collection("Users").doc(user.id)
@@ -29,6 +30,8 @@ const App = (props) => {
 
   const signOut = () => {
     Firebase.doSignOut()
+    unsubscribe()
+    setUnsubscribe(null)
     setCurrentUser(null)
     setAllUsersFromChat(null)
   }
